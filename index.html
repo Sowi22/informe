@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estrella Insurance #375 · Informe de marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<style>:root { --font-anthropic-sans: 'Inter', 'Poppins', sans-serif; --font-anthropic-serif: 'Inter', serif;
+  --color-fg: #1F2328; --color-fg-muted: #5E636B; --color-bg: #FFFFFF; --color-panel: #FFFFFF; --color-border-line: #E3E5E8;
+  --color-ok: #00873A; --color-warn: #C46200; --color-bad: #B8382A;
+  --cds-font-size-caption: 12px; --cds-font-size-body: 13.5px; --cds-font-size-heading: 16px; --cds-font-size-title: 24px; --cds-font-weight-medium: 600;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 14px; --cds-gap-lg: 22px; --cds-gap-xl: 32px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 14px; --cds-pad-lg: 18px; --cds-radius: 10px;
+  --cds-chart-grid: #ECEEF0; --cds-chart-axis: #C9CDD2; --cds-chart-reference: #9AA0A6; --cds-chart-muted: #C9CDD2;
+  --cds-surface-popover: #fff; --cds-border: #E3E5E8; --cds-shadow-popover: none; --cds-text-secondary: #5E636B;
+  --cds-dur-slow: 0s; --cds-ease-out: linear; }
+:root { --cds-dur-slow: .5s; --cds-ease-out: cubic-bezier(.2,.8,.2,1); --cds-shadow-popover: 0 6px 20px rgba(0,0,0,.12); color-scheme: light; }
+html { background: #F4F6F5; }
+body { margin: 0; background: #F4F6F5; color: var(--color-fg); font-family: var(--font-anthropic-sans); -webkit-text-size-adjust: 100%; }
+#dash-root { padding: 0 max(16px, env(safe-area-inset-right, 0px)) 32px max(16px, env(safe-area-inset-left, 0px)); }
+.ei-bar { background: #F4F6F5; }
+.ei-card, .ei-tile, .ei-month, .ei-stage, .ei-table-wrap { background: #fff; }
+.ei-tile.is-main { background: linear-gradient(160deg, var(--ei-green-soft), transparent 70%), #fff; }
+.ei-print { background: #00953B; color: #fff; border-color: #00953B; }
+.ei-print:hover { background: #007A30; }
+@media (max-width: 640px) { .ei-fh { grid-template-columns: 1fr; } }
+</style>
+<style>#dash-root { --dash-gutter: clamp(12px, 3vw, 32px); }
+.ei { --ei-green: #00953B; --ei-orange: #EA7603; --ei-gray: #757982; --ei-red: #C8402F; --ei-blue: #3A7BC8; --ei-teal: #0E8C8C;
+  --ei-green-soft: color-mix(in srgb, #00953B 13%, transparent); --ei-orange-soft: color-mix(in srgb, #EA7603 14%, transparent);
+  --ei-red-soft: color-mix(in srgb, #C8402F 12%, transparent); --ei-gray-soft: color-mix(in srgb, #757982 14%, transparent);
+  --ei-muted: color-mix(in srgb, #757982 38%, transparent);
+  max-width: 1180px; margin-inline: auto; font-family: var(--font-anthropic-sans); color: var(--color-fg);
+  font-size: var(--cds-font-size-body); line-height: 1.55; }
+.ei .num, .ei [data-draw="n"], .ei [data-draw="tile"] { font-variant-numeric: tabular-nums; }
+.ei b[data-draw="n"] { font-weight: 700; }
+.ei [data-dash-source-state=empty] { color: transparent; }
+.ei [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.ei .ei-failed { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.ei h2, .ei h3, .ei h4 { margin: 0; letter-spacing: -0.01em; }
+.ei p { margin: 0 0 var(--cds-gap-sm); }
+.ei-muted { color: var(--color-fg-muted); }
+.ei-small { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+
+/* barra superior */
+.ei-bar { position: sticky; top: 0; z-index: 5; background: var(--color-bg); border-bottom: 1px solid var(--color-border-line);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm) var(--cds-gap-md); padding: var(--cds-pad-sm) 0; margin-bottom: var(--cds-gap-lg); }
+.ei-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: 999px; padding: 3px; gap: 2px; background: var(--color-panel); }
+.ei-seg button { border: 0; background: transparent; color: var(--color-fg-muted); font: inherit; font-size: var(--cds-font-size-caption); font-weight: 600;
+  padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+.ei-seg button[aria-pressed="true"] { background: var(--ei-green); color: #fff; }
+.ei-seg button:focus-visible, .ei-nav button:focus-visible, .ei-btn:focus-visible { outline: 2px solid var(--ei-orange); outline-offset: 2px; }
+.ei-nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1 1 360px; min-width: 0; }
+.ei-nav button { border: 0; background: none; color: var(--color-fg-muted); font: inherit; font-size: var(--cds-font-size-caption); padding: 6px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+.ei-nav button:hover { color: var(--color-fg); background: var(--ei-gray-soft); }
+.ei-btn { border: 1px solid var(--color-border-line); background: var(--color-panel); color: var(--color-fg); font: inherit; font-size: var(--cds-font-size-caption); font-weight: 600; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+
+/* portada */
+.ei-cover { position: relative; overflow: hidden; border-radius: 18px; padding: clamp(24px, 5vw, 56px); margin-bottom: var(--cds-gap-lg);
+  background: linear-gradient(135deg, #00953B 0%, #007A30 62%, #00622A 100%); color: #fff; }
+.ei-cover::after { content: ""; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; border-radius: 50%; border: 36px solid rgba(255,255,255,.07); }
+.ei-cover-brand { font-weight: 900; letter-spacing: .14em; font-size: clamp(13px, 1.6vw, 15px); text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.ei-cover-brand i { display: inline-block; width: 26px; height: 4px; background: #EA7603; border-radius: 2px; }
+.ei-cover h1 { font-weight: 900; font-size: clamp(30px, 5.4vw, 56px); line-height: 1.04; letter-spacing: -0.02em; margin: 18px 0 10px; max-width: 16ch; }
+.ei-cover-period { display: inline-block; background: #EA7603; color: #fff; font-weight: 800; font-size: var(--cds-font-size-caption); letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+.ei-cover-lead { margin: 20px 0 0; max-width: 62ch; font-size: clamp(15px, 1.7vw, 18px); color: rgba(255,255,255,.92); }
+.ei-cover-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 26px; font-size: var(--cds-font-size-caption); color: rgba(255,255,255,.85); }
+.ei-cover-meta b { color: #fff; font-weight: 700; }
+
+/* titular */
+.ei-headline { border-left: 4px solid var(--ei-orange); padding: 4px 0 4px 16px; margin: 0 0 var(--cds-gap-lg); font-size: clamp(16px, 2vw, 20px); line-height: 1.45; }
+.ei-showing { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+
+/* secciones */
+.ei-section { margin: clamp(36px, 6vw, 64px) 0 0; scroll-margin-top: 70px; }
+.ei-kicker { color: var(--ei-green); font-weight: 800; font-size: var(--cds-font-size-caption); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.ei-section > h2 { font-weight: 900; font-size: clamp(22px, 3vw, 30px); line-height: 1.15; margin-bottom: 6px; }
+.ei-section > .ei-intro { color: var(--color-fg-muted); max-width: 75ch; margin-bottom: var(--cds-gap-lg); }
+.ei-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.ei-grid-3 { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.ei-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; position: relative; }
+.ei-card > h3 { font-size: var(--cds-font-size-heading); font-weight: 700; margin-bottom: 2px; }
+.ei-card > .ei-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-md); }
+
+/* KPI */
+.ei-hero { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin-bottom: var(--cds-gap-md); }
+.ei-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ei-tile.is-main { background: linear-gradient(160deg, var(--ei-green-soft), transparent 70%), var(--color-panel); border-color: color-mix(in srgb, #00953B 45%, transparent); }
+.ei-tile-label { font-size: var(--cds-font-size-caption); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--color-fg-muted); }
+.ei-tile.is-main .ei-tile-label { color: var(--ei-green); }
+.ei-tile-value { font-weight: 900; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.1; letter-spacing: -0.02em; min-height: 1.1em; }
+.ei-tile.is-main .ei-tile-value { font-size: clamp(40px, 5.4vw, 60px); color: var(--ei-green); }
+.ei-tile-delta { font-size: var(--cds-font-size-caption); font-weight: 700; }
+.ei-tile-def { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: auto; padding-top: 6px; }
+.ei-kpis { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+.ei-kpis .ei-tile-value { font-size: clamp(24px, 2.6vw, 30px); }
+.pos { color: var(--color-ok); } .neg { color: var(--color-bad); } .neu { color: var(--color-fg-muted); }
+
+/* alertas */
+.ei-alerts { display: grid; gap: var(--cds-gap-sm); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+.ei-alert { border-radius: var(--cds-radius); padding: 14px 16px; border-left: 4px solid; background: var(--color-panel); border-top: 1px solid var(--color-border-line); border-right: 1px solid var(--color-border-line); border-bottom: 1px solid var(--color-border-line); }
+.ei-alert h4 { font-size: var(--cds-font-size-body); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; }
+.ei-alert p { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.ei-alert p b { color: var(--color-fg); }
+.ei-tag { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.a-ok { border-left-color: var(--ei-green); } .a-ok .ei-tag { background: var(--ei-green-soft); color: var(--ei-green); }
+.a-risk { border-left-color: var(--ei-red); } .a-risk .ei-tag { background: var(--ei-red-soft); color: var(--ei-red); }
+.a-warn { border-left-color: var(--ei-orange); } .a-warn .ei-tag { background: var(--ei-orange-soft); color: var(--ei-orange); }
+.a-gap { border-left-color: var(--ei-gray); } .a-gap .ei-tag { background: var(--ei-gray-soft); color: var(--color-fg-muted); }
+
+/* columnas de conversaciones */
+.ei-chart { position: relative; min-height: 240px; }
+.ei-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--cds-gap-md); align-items: end; height: 100%; }
+.ei-col { display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: .45; transition: opacity .3s; }
+.ei-col.is-on { opacity: 1; }
+.ei-col-val { font-weight: 900; font-size: clamp(22px, 3vw, 32px); color: var(--ei-green); }
+.ei-col-track { height: 150px; width: min(72px, 70%); display: flex; align-items: flex-end; }
+.ei-col-bar { width: 100%; background: var(--ei-green); border-radius: 6px 6px 2px 2px; }
+.ei-col-bar.is-zero { background: var(--ei-red); }
+.ei-col-lab { font-weight: 700; }
+.ei-col-sub { display: flex; flex-direction: column; align-items: center; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-align: center; line-height: 1.35; }
+
+/* barras horizontales */
+.ei-hbars { display: flex; flex-direction: column; gap: 10px; }
+.ei-hbar { display: grid; grid-template-columns: minmax(0, 15rem) 1fr auto; gap: 10px; align-items: center; }
+.ei-hbar.is-set .ei-hbar-lab { padding-left: 14px; }
+.ei-hbar-lab { font-size: var(--cds-font-size-caption); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.ei-hbar-track { position: relative; min-height: 18px; background: var(--ei-gray-soft); border-radius: 4px; }
+.ei-hbar-bar { height: 18px; background: var(--ei-muted); border-radius: 4px; }
+.ei-hbar-bar.is-video { background: var(--ei-green); }
+.ei-hbar-none { display: block; padding: 1px 8px; font-size: 11px; line-height: 16px; color: var(--color-bad); font-weight: 600; }
+.ei-hbar-ref { position: absolute; top: -4px; bottom: -4px; border-left: 2px dashed var(--ei-orange); }
+.ei-hbar-val { font-weight: 800; font-size: var(--cds-font-size-caption); min-width: 5.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.ei-hbar-val.is-neg { color: var(--color-bad); }
+.ei-hbar-legend { margin-top: 12px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+@media (max-width: 560px) { .ei-hbar { grid-template-columns: 1fr auto; } .ei-hbar-lab { grid-column: 1 / -1; } }
+.ei-chip { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; padding: 1px 7px; border-radius: 999px; }
+.ei-chip.is-video { background: var(--ei-green-soft); color: var(--ei-green); }
+.ei-chip.is-img { background: var(--ei-gray-soft); color: var(--color-fg-muted); }
+
+/* mini gráficos */
+.ei-minis { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); }
+.ei-minis .ei-card { padding: var(--cds-pad-md); }
+.ei-mini-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.ei-mini-head h3 { font-size: var(--cds-font-size-body); font-weight: 700; }
+.ei-mini-chg { font-size: var(--cds-font-size-caption); font-weight: 800; }
+.ei-mini-box { position: relative; min-height: 150px; margin-top: 10px; }
+.ei-mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-items: end; }
+.ei-mini-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ei-mini-val { font-size: var(--cds-font-size-caption); font-weight: 700; font-variant-numeric: tabular-nums; }
+.ei-mini-track { height: 96px; width: 100%; max-width: 44px; display: flex; align-items: flex-end; }
+.ei-mini-bar { width: 100%; background: var(--ei-muted); border-radius: 4px 4px 2px 2px; }
+.ei-mini-col.is-on .ei-mini-bar { background: var(--ei-green); }
+.ei-mini-col.is-on .ei-mini-val { color: var(--ei-green); }
+.ei-mini-lab { font-size: 11px; color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .05em; }
+
+/* línea */
+.ei-line-box { position: relative; min-height: 280px; }
+.ei svg .ei-gl { stroke: var(--cds-chart-grid); stroke-width: 1; }
+.ei svg .ei-ref { stroke: var(--cds-chart-reference); stroke-dasharray: 4 4; }
+.ei svg .ei-axis-t { fill: var(--color-fg-muted); font-size: 11px; font-family: var(--font-anthropic-sans); }
+.ei svg .ei-line { fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+.ei svg .ei-end { font-size: 11.5px; font-weight: 700; font-family: var(--font-anthropic-sans); }
+
+/* inversión apilada */
+.ei-stack { display: flex; flex-direction: column; gap: 14px; }
+.ei-stack-row { display: grid; grid-template-columns: 6.5rem 1fr auto; gap: 4px 12px; align-items: center; opacity: .5; transition: opacity .3s; }
+.ei-stack-row.is-on { opacity: 1; }
+.ei-stack-lab { font-weight: 700; font-size: var(--cds-font-size-caption); }
+.ei-stack-track { height: 26px; }
+.ei-stack-inner { height: 100%; display: flex; gap: 2px; }
+.ei-sseg { min-width: 3px; height: 100%; border-radius: 3px; }
+.ei-stack-val { font-weight: 800; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ei-stack-crit { grid-column: 2 / -1; font-size: 11px; color: var(--color-fg-muted); margin-top: -2px; }
+.o-msj { background: #00953B; } .o-tig { background: #EA7603; } .o-tgen { background: #3A7BC8; } .o-ven { background: #0E8C8C; }
+.o-sin { background: repeating-linear-gradient(45deg, var(--ei-muted) 0 4px, transparent 4px 8px); border: 1px solid var(--ei-muted); }
+.ei-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: 14px; }
+.ei-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ei-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+@media (max-width: 560px) { .ei-stack-row { grid-template-columns: 1fr auto; } .ei-stack-track { grid-column: 1 / -1; grid-row: 2; } .ei-stack-crit { grid-column: 1 / -1; } }
+
+/* tablas */
+.ei-table-wrap { overflow-x: auto; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-panel); }
+.ei table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); }
+.ei th { text-align: left; font-weight: 700; color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; padding: 10px 12px; border-bottom: 1px solid var(--color-border-line); background: var(--color-panel); position: sticky; top: 0; white-space: nowrap; }
+.ei th.num, .ei td.num { text-align: right; }
+.ei td { padding: 9px 12px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.ei tbody tr:last-child td { border-bottom: 0; }
+.ei tbody tr:hover td { background: var(--ei-gray-soft); }
+.ei td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ei .ei-td-name { font-weight: 600; min-width: 12rem; }
+.ei .ei-td-name .ei-chip { margin-left: 6px; }
+.ei .ei-td-m { color: var(--color-fg-muted); white-space: nowrap; }
+.ei .ei-td-note { color: var(--color-fg-muted); min-width: 14rem; font-size: 11.5px; }
+.ei .ei-td-st { font-weight: 800; white-space: nowrap; }
+.ei td.is-best { color: var(--ei-green); font-weight: 800; background: var(--ei-green-soft); }
+.ei td.is-worst { color: var(--color-bad); font-weight: 700; }
+.ei tr.is-set td { background: color-mix(in srgb, #757982 5%, transparent); }
+.ei tr.is-set .ei-td-name { font-weight: 400; padding-left: 26px; }
+.ei tr.is-gap td { font-style: italic; }
+
+
+/* etapas */
+.ei-stages { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); counter-reset: st; }
+.ei-stage { position: relative; padding: var(--cds-pad-lg); border-radius: var(--cds-radius); background: var(--color-panel); border: 1px solid var(--color-border-line); border-top: 5px solid var(--ei-gray); }
+.ei-stage:nth-child(1) { border-top-color: var(--ei-orange); }
+.ei-stage:nth-child(2) { border-top-color: var(--ei-green); }
+.ei-stage-m { font-size: var(--cds-font-size-caption); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-fg-muted); }
+.ei-stage h3 { font-size: 19px; font-weight: 900; margin: 4px 0 8px; }
+.ei-stage ul { margin: 0; padding-left: 18px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ei-stage-fig { display: flex; gap: 18px; margin: 10px 0; padding: 10px 0; border-top: 1px dashed var(--color-border-line); border-bottom: 1px dashed var(--color-border-line); }
+.ei-stage-fig div { display: flex; flex-direction: column; font-size: 11px; color: var(--color-fg-muted); }
+.ei-stage-fig b { font-size: 20px; font-weight: 900; color: var(--color-fg); }
+
+/* hechos e hipótesis */
+.ei-fh { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; background: var(--color-panel); }
+.ei-fh > div { padding: 14px 16px; border-bottom: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
+.ei-fh > div:nth-child(odd) { border-right: 1px solid var(--color-border-line); }
+.ei-fh .ei-fh-h { font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: 10.5px; background: var(--ei-gray-soft); }
+.ei-fh .ei-fh-h.f { color: var(--ei-green); } .ei-fh .ei-fh-h.h { color: var(--ei-orange); }
+.ei-fh > div:nth-last-child(-n+2) { border-bottom: 0; }
+@media (max-width: 640px) { .ei-fh { grid-template-columns: 1fr; } .ei-fh > div:nth-child(odd) { border-right: 0; } .ei-fh .ei-fh-h.h { display: none; } .ei-fh > div:nth-child(even):not(.ei-fh-h) { background: var(--ei-orange-soft); } }
+
+/* detalle mensual */
+.ei-month { border: 1px solid var(--color-border-line); border-radius: 16px; padding: clamp(18px, 3vw, 32px); background: var(--color-panel); margin-bottom: var(--cds-gap-lg); scroll-margin-top: 70px; }
+.ei-month-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; border-bottom: 2px solid var(--ei-green); padding-bottom: 12px; margin-bottom: 18px; }
+.ei-month-head h3 { font-size: clamp(22px, 3vw, 30px); font-weight: 900; }
+.ei-month-head span { font-weight: 700; color: var(--ei-orange); text-transform: uppercase; letter-spacing: .08em; font-size: var(--cds-font-size-caption); }
+.ei-month h4 { font-size: 15px; font-weight: 800; margin: 22px 0 8px; }
+.ei-month .ei-table-wrap { background: var(--color-bg); }
+.ei-pn { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); margin-top: 8px; }
+.ei-pn > div { border-radius: 10px; padding: 14px 16px; font-size: var(--cds-font-size-caption); }
+.ei-pn ul { margin: 6px 0 0; padding-left: 18px; }
+.ei-pn li { margin-bottom: 4px; }
+.ei-pn .p { background: var(--ei-green-soft); } .ei-pn .p h5 { color: var(--ei-green); }
+.ei-pn .n { background: var(--ei-red-soft); } .ei-pn .n h5 { color: var(--ei-red); }
+.ei-pn .f { background: var(--ei-orange-soft); } .ei-pn .f h5 { color: var(--ei-orange); }
+.ei-pn h5 { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.ei-list { padding-left: 20px; margin: 6px 0 12px; }
+.ei-list li { margin-bottom: 4px; }
+.ei-concl { border-left: 4px solid var(--ei-green); padding: 10px 16px; background: var(--ei-green-soft); border-radius: 0 10px 10px 0; margin-top: 18px; }
+
+/* plan */
+.ei-plan { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.ei-plan .ei-card h3 { display: flex; align-items: center; gap: 8px; }
+.ei-plan .ei-card h3 i { width: 10px; height: 10px; border-radius: 50%; background: var(--ei-green); }
+.ei-plan .ei-card:nth-child(2) h3 i { background: var(--ei-orange); }
+.ei-plan .ei-card:nth-child(3) h3 i { background: var(--ei-blue); }
+.ei-plan .ei-card:nth-child(4) h3 i { background: var(--ei-gray); }
+.ei-plan ul { padding-left: 18px; margin: 8px 0 0; font-size: var(--cds-font-size-caption); }
+.ei-plan li { margin-bottom: 5px; }
+.ei-funnel { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ei-funnel span { font-size: 11px; padding: 4px 10px; border-radius: 6px; background: var(--ei-gray-soft); }
+.ei-funnel span.on { background: var(--ei-green); color: #fff; font-weight: 700; }
+
+/* conclusión */
+.ei-final { border-radius: 18px; padding: clamp(24px, 4vw, 44px); background: linear-gradient(135deg, #00953B, #00622A); color: #fff; }
+.ei-final h2 { color: #fff; }
+.ei-final p { color: rgba(255,255,255,.92); max-width: 78ch; }
+.ei-final .ei-kicker { color: #FFD3A6; }
+.ei-final-quote { margin-top: 18px; padding: 16px 18px; border-radius: 12px; background: rgba(255,255,255,.12); font-weight: 800; font-size: clamp(16px, 2vw, 19px); }
+.ei-final b[data-draw] { color: #fff; }
+
+/* notas */
+.ei-notes { margin-top: var(--cds-gap-xl); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ei-notes summary { cursor: pointer; font-weight: 700; color: var(--color-fg); }
+.ei-notes dl { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: 6px 16px; margin: 12px 0; }
+.ei-notes dt { font-weight: 700; color: var(--color-fg); }
+.ei-notes dd { margin: 0; }
+.ei-notes h4 { margin: 16px 0 6px; color: var(--color-fg); font-size: var(--cds-font-size-body); }
+@media (max-width: 560px) { .ei-notes dl { grid-template-columns: 1fr; } .ei-notes dd { margin-bottom: 8px; } }
+.ei-footer { margin: var(--cds-gap-xl) 0 var(--cds-gap-lg); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* tooltip */
+.ei-tip { position: absolute; z-index: 4; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover);
+  padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); pointer-events: none; max-width: 280px; }
+.ei-tip-h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.ei-tip-v { font-variant-numeric: tabular-nums; }
+
+/* animación */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ei-up { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes ei-right { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes ei-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .ei-anim .ei-col-bar, .ei-anim .ei-mini-bar { transform-origin: bottom; animation: ei-up var(--cds-dur-slow) var(--cds-ease-out) both; }
+  .ei-anim .ei-hbar-bar, .ei-anim .ei-stack-inner { transform-origin: left; animation: ei-right var(--cds-dur-slow) var(--cds-ease-out) both; }
+  .ei-tile, .ei-alert { animation: ei-fade var(--cds-dur-slow) var(--cds-ease-out) both; }
+}
+
+/* impresión / PDF */
+@media print {
+  .ei-bar, .ei-btn { display: none !important; }
+  .ei-cover, .ei-final, .ei-tile.is-main, .o-msj, .o-tig, .o-tgen, .o-ven, .ei-col-bar, .ei-mini-bar, .ei-hbar-bar, .ei-seg button { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ei-section, .ei-month { break-before: auto; }
+  .ei-card, .ei-tile, .ei-alert, .ei-stage, .ei-pn > div, tr { break-inside: avoid; }
+  .ei-month { break-before: page; }
+  .ei-table-scroll { max-height: none; overflow: visible; }
+}
+
+.ei-line-legend { margin: 8px 0 0; }
+</style>
+<style>/* selector de periodo */
+.ei-bar { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 10px; top: env(safe-area-inset-top, 0px); }
+.ei-picker, .ei-bar-row { min-width: 0; max-width: 100%; }
+.ei-picker .ei-seg { flex-wrap: wrap; max-width: 100%; border-radius: 18px; }
+@media (max-width: 520px) { .ei-picker .ei-seg button { padding: 6px 10px; } .ei-nav { flex-basis: 100%; } }
+.ei-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.ei-picker-l { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-fg-muted); }
+.ei-seg button:disabled { opacity: .38; cursor: not-allowed; }
+.ei-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ei-chipbtn { border: 1px solid var(--color-border-line); background: #fff; color: var(--color-fg-muted); font: inherit; font-size: var(--cds-font-size-caption); font-weight: 700; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.ei-chipbtn[aria-pressed="true"] { background: var(--ei-green-soft); border-color: #00953B; color: #00733A; }
+.ei-chipbtn[aria-pressed="true"]::before { content: "✓ "; }
+.ei-chipbtn:focus-visible { outline: 2px solid var(--ei-orange); outline-offset: 2px; }
+.ei-bar-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.ei-vis-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); margin-top: var(--cds-gap-md); }
+.ei-sub { margin: 28px 0 6px; font-size: var(--cds-font-size-heading); }
+.o-otro { background: #8A5CC2; }
+/* variación por indicador */
+.ei-delta-list { display: flex; flex-direction: column; gap: 14px; }
+.ei-delta-row { display: grid; grid-template-columns: minmax(0, 11rem) 1fr 4.6rem; gap: 12px; align-items: center; }
+.ei-delta-name { font-weight: 700; font-size: var(--cds-font-size-body); display: flex; flex-direction: column; line-height: 1.3; }
+.ei-delta-name span { font-weight: 500; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.ei-delta-track { height: 16px; background: var(--ei-gray-soft); border-radius: 4px; }
+.ei-delta-bar { height: 100%; background: var(--ei-green); border-radius: 4px; }
+.ei-delta-bar.is-neg { background: var(--ei-red); }
+.ei-delta-val { font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .ei-delta-row { grid-template-columns: 1fr auto; } .ei-delta-track { grid-column: 1 / -1; grid-row: 2; } }
+.ei-col-track { height: 150px; }
+.ei b.ei-n { font-weight: 700; }
+@media (max-width: 640px) { .ei-bar { position: static; } }
+</style>
+<style>@media print {
+html, body { margin: 0; background: #fff !important; }
+#dash-root { padding: 0; }
+.ei-bar { display: none !important; }
+* { animation: none !important; transition: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.ei-section { margin-top: 26px; break-inside: auto; }
+.ei-section > h2, .ei-kicker, .ei-card > h3, .ei-month h4, .ei-sub { break-after: avoid; }
+.ei-month { break-before: page; border: 0; padding: 0; background: none; }
+#comparativo, #campanas, #conclusion { break-before: page; margin-top: 0; }
+.ei-card, .ei-tile, .ei-stage, .ei-pn > div, .ei-fh, tr { break-inside: avoid; }
+.ei-table-wrap { overflow: visible; }
+.ei table { font-size: 10.5px; }
+.ei td, .ei th { padding: 6px 7px; }
+.ei .ei-td-name { min-width: 0; }
+.ei th { position: static; white-space: normal; }
+.ei-hero { grid-template-columns: repeat(3, 1fr); }
+.ei-kpis { grid-template-columns: repeat(5, 1fr); }
+.ei-kpis .ei-tile { padding: 12px; }
+.ei-kpis .ei-tile-value { font-size: 22px; }
+.ei-minis { grid-template-columns: repeat(5, 1fr); }
+.ei-mini-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+.ei-mini-track { height: 70px; }
+.ei-mini-box { min-height: 110px; }
+.ei-col-track { height: 110px; }
+.ei-vis-grid { grid-template-columns: 1fr; }
+.ei-plan { grid-template-columns: repeat(2, 1fr); }
+.ei-intro, .ei-note { max-width: none; }
+.ei-notes { font-size: 10.5px; }
+.ei-table-campanas table { font-size: 7.8px; table-layout: fixed; width: 100%; }
+.ei-table-campanas td, .ei-table-campanas th { padding: 4px; overflow-wrap: anywhere; }
+.ei-table-campanas th { font-size: 7.4px; letter-spacing: 0; }
+.ei-table-campanas td.num { white-space: normal; }
+.ei-table-campanas .ei-td-note { min-width: 0; font-size: 8.4px; }
+.ei-table-campanas .ei-chip { display: inline-block; margin: 2px 0 0; }
+.ei-table-campanas th:nth-child(1){width:7%} .ei-table-campanas th:nth-child(2){width:15%} .ei-table-campanas th:nth-child(3){width:8.5%}
+.ei-table-campanas th:nth-child(4){width:8.5%} .ei-table-campanas th:nth-child(5){width:10%} .ei-table-campanas th:nth-child(6){width:7.5%}
+.ei-table-campanas th:nth-child(7){width:6.5%} .ei-table-campanas th:nth-child(8){width:7%} .ei-table-campanas th:nth-child(9){width:7.5%}
+.ei-table-campanas th:nth-child(10){width:5.5%} .ei-table-campanas th:nth-child(11){width:5.5%} .ei-table-campanas th:nth-child(12){width:11.5%}
+}
+@page { size: A4; margin: 12mm 11mm 14mm; }
+</style>
+</head>
+<body>
+<div id="dash-root"><div class="ei" lang="es">
+
+<div class="ei-bar">
+  <div class="ei-picker">
+    <span class="ei-picker-l">Periodo</span>
+    <div class="ei-seg" role="group" aria-label="Periodo" id="presets"></div>
+    <span class="ei-picker-l">Meses</span>
+    <div class="ei-chips" role="group" aria-label="Meses a comparar" id="meses"></div>
+  </div>
+  <div class="ei-bar-row">
+    <nav class="ei-nav" aria-label="Secciones">
+      <button type="button" data-goto="resumen">Resumen</button>
+      <button type="button" data-goto="conversaciones">Conversaciones</button>
+      <button type="button" data-goto="visibilidad">Visibilidad</button>
+      <button type="button" data-goto="inversion">Inversión</button>
+      <button type="button" data-goto="campanas">Campañas</button>
+      <button type="button" data-goto="comparativo">Comparativo</button>
+      <button type="button" data-goto="etapas">Etapas</button>
+      <button type="button" data-goto="detalle">Detalle por mes</button>
+      <button type="button" data-goto="aprendizajes">Aprendizajes</button>
+      <button type="button" data-goto="plan">Plan</button>
+      <button type="button" data-goto="conclusion">Conclusión</button>
+    </nav>
+    <button type="button" class="ei-btn ei-print" data-print>Imprimir o guardar PDF</button>
+  </div>
+</div>
+
+<header class="ei-cover" id="portada">
+  <div class="ei-cover-brand"><i></i><span data-fijo="cliente"></span></div>
+  <h1>Informe de resultados de marketing digital</h1>
+  <span class="ei-cover-period" data-periodo></span>
+  <p class="ei-cover-lead">Un análisis de la evolución digital, el rendimiento publicitario y las estrategias implementadas para fortalecer la captación de clientes en el mercado asegurador de Florida.</p>
+  <div class="ei-cover-meta">
+    <span>Cliente: <b data-fijo="contacto"></b></span>
+    <span>Equipo: <b data-fijo="agencia"></b></span>
+    <span>Mercado: <b data-fijo="mercado"></b></span>
+    <span>Moneda: <b>pesos colombianos (COP), IVA del 19% incluido</b></span>
+  </div>
+</header>
+
+<p class="ei-headline" id="headline"></p>
+
+<section class="ei-section" id="resumen" style="margin-top:0">
+  <div class="ei-kicker">Dashboard ejecutivo</div>
+  <h2>Resumen del periodo</h2>
+  <p class="ei-showing" id="mostrando"></p>
+  <div class="ei-hero" id="kpi-main"></div>
+  <div class="ei-kpis" id="kpi-org"></div>
+</section>
+
+<section class="ei-section" id="conversaciones">
+  <div class="ei-kicker">Resultados de captación</div>
+  <h2>Conversaciones generadas</h2>
+  <p class="ei-intro" id="conv-intro"></p>
+  <div class="ei-card">
+    <h3>Conversaciones por mes</h3>
+    <p class="ei-note">Con la inversión en campañas de mensajes de cada mes (IVA incluido).</p>
+    <div class="ei-chart" id="conv-chart"></div>
+  </div>
+  <div class="ei-card" style="margin-top:var(--cds-gap-md)">
+    <h3>Resultados de las campañas de tráfico</h3>
+    <p class="ei-note">Visitas al perfil logradas con campañas de tráfico a Instagram. No se mezclan con las conversaciones ni con las visitas a páginas de destino.</p>
+    <div id="traf-table"></div>
+    <p class="ei-small" style="margin-top:10px" id="traf-otros"></p>
+  </div>
+</section>
+
+<section class="ei-section" id="visibilidad">
+  <div class="ei-kicker">Presencia digital</div>
+  <h2>Evolución de la visibilidad en Instagram</h2>
+  <p class="ei-intro" id="vis-intro"></p>
+  <div class="ei-minis" id="minis"></div>
+  <p class="ei-small" style="margin-top:6px" id="vis-nota"></p>
+  <div class="ei-vis-grid">
+    <div class="ei-card" id="cambio-card">
+      <h3 id="cambio-titulo"></h3>
+      <p class="ei-note" id="cambio-nota"></p>
+      <div id="cambio"></div>
+    </div>
+    <div class="ei-card">
+      <h3>Tabla comparativa de Instagram</h3>
+      <p class="ei-note">En verde el mejor mes, en rojo el más bajo.</p>
+      <div id="tabla-instagram"></div>
+      <p class="ei-small" style="margin-top:10px" id="vis-share"></p>
+    </div>
+  </div>
+</section>
+
+<section class="ei-section" id="inversion">
+  <div class="ei-kicker">Inversión publicitaria</div>
+  <h2>Cuánto se invirtió y en qué</h2>
+  <p class="ei-intro" id="inv-intro"></p>
+  <div class="ei-card">
+    <h3>Inversión mensual por objetivo de campaña</h3>
+    <p class="ei-note">Bajo cada barra, el criterio con el que se registró el total del mes.</p>
+    <div class="ei-legend"><span><i class="o-msj"></i>Mensajes</span><span><i class="o-tig"></i>Tráfico a Instagram</span><span><i class="o-tgen"></i>Tráfico general</span><span><i class="o-ven"></i>Ventas / landing</span><span><i class="o-otro"></i>Otros objetivos</span><span><i class="o-sin"></i>Sin asignar (diferencia con el consolidado)</span></div>
+    <div id="inv-chart"></div>
+  </div>
+</section>
+
+<section class="ei-section" id="campanas">
+  <div class="ei-kicker">Detalle publicitario</div>
+  <h2>Todas las campañas y conjuntos</h2>
+  <p class="ei-intro">Los conjuntos aparecen debajo de su campaña y no se suman dos veces. Inversión, costos y CPM incluyen IVA del 19%. El costo por resultado se muestra para tráfico y llamadas; no para conversaciones. El asterisco (*) marca costos calculados como inversión ÷ resultados.</p>
+  <div id="tabla-campanas"></div>
+</section>
+
+<section class="ei-section" id="comparativo">
+  <div class="ei-kicker">Análisis comparativo</div>
+  <h2>Mejor y menor mes en cada indicador</h2>
+  <p class="ei-intro" id="comp-intro"></p>
+  <div id="tabla-comparativo"></div>
+  <div class="ei-vis-grid" id="comp-listas">
+    <div class="ei-card"><h3>Lo que mejoró</h3><ul class="ei-list" id="mejoro"></ul></div>
+    <div class="ei-card"><h3>Lo que empeoró</h3><ul class="ei-list" id="empeoro"></ul></div>
+  </div>
+  <h3 class="ei-sub" id="analisis-titulo"></h3>
+  <p class="ei-small" style="margin-bottom:12px">A la izquierda, lo que muestran los datos. A la derecha, explicaciones posibles que los datos del informe no permiten confirmar.</p>
+  <div class="ei-fh" id="hechos"></div>
+  <div class="ei-card" style="margin-top:var(--cds-gap-lg)">
+    <h3>Oportunidades de mejora</h3>
+    <ol class="ei-list" id="oportunidades"></ol>
+  </div>
+</section>
+
+<section class="ei-section" id="etapas">
+  <div class="ei-kicker">Análisis estratégico</div>
+  <h2 id="etapas-titulo"></h2>
+  <div class="ei-stages" id="etapas-lista"></div>
+</section>
+
+<section class="ei-section" id="detalle">
+  <div class="ei-kicker">Información detallada</div>
+  <h2>Detalle de cada mes</h2>
+  <p class="ei-intro">Métricas, resultados, comparación con el mes anterior y lectura estratégica de cada periodo.</p>
+  <div id="detalle-lista"></div>
+</section>
+
+<section class="ei-section" id="aprendizajes">
+  <div class="ei-kicker">Dificultades y aprendizajes</div>
+  <h2>Qué dejó el trabajo hasta hoy</h2>
+  <div class="ei-vis-grid">
+    <div class="ei-card"><h3>Principales dificultades</h3><ol class="ei-list" id="dificultades"></ol></div>
+    <div class="ei-card"><h3>Aprendizajes</h3><ul class="ei-list" id="aprendizajes-lista"></ul></div>
+  </div>
+</section>
+
+<section class="ei-section" id="plan">
+  <div class="ei-kicker">Plan de acción</div>
+  <h2 id="plan-titulo"></h2>
+  <p class="ei-intro" id="plan-intro"></p>
+  <div class="ei-plan" id="plan-bloques"></div>
+</section>
+
+<section class="ei-section" id="conclusion">
+  <div class="ei-final">
+    <div class="ei-kicker">Conclusión ejecutiva</div>
+    <h2 style="font-weight:900;font-size:clamp(22px,3vw,30px);margin-bottom:12px">Balance</h2>
+    <div id="conclusion-txt"></div>
+    <div class="ei-final-quote" id="frase"></div>
+  </div>
+</section>
+
+<details class="ei-notes" id="notas">
+  <summary>Definiciones, fuentes y advertencias sobre los datos</summary>
+  <h4>Definiciones</h4>
+  <dl>
+    <dt>Alcance</dt><dd>Personas distintas que vieron el contenido o anuncio. Sumar meses puede contar a la misma persona varias veces.</dd>
+    <dt>Impresiones / visualizaciones</dt><dd>Veces que se mostró el contenido, incluidas repeticiones.</dd>
+    <dt>Frecuencia</dt><dd>Impresiones ÷ alcance: cuántas veces vio cada persona el anuncio en promedio.</dd>
+    <dt>CPM</dt><dd>Costo por cada mil impresiones.</dd>
+    <dt>CTR</dt><dd>Porcentaje de impresiones que terminaron en clic.</dd>
+    <dt>Conversación</dt><dd>Chat de WhatsApp iniciado desde un anuncio de mensajes, según Meta.</dd>
+    <dt>IVA</dt><dd>Todos los montos en pesos (inversión, costos por resultado y CPM) incluyen el IVA del 19%: valor de Meta × 1,19.</dd>
+  </dl>
+  <h4>Cómo se registró la inversión de cada mes</h4>
+  <ul class="ei-list" id="criterios"></ul>
+  <h4>Advertencias</h4>
+  <ul class="ei-list">
+    <li>Fuente: capturas de Meta (estadísticas de Instagram y Ads Manager). Meta reporta los montos sin IVA; este informe les suma el 19%.</li>
+    <li><span data-fijo="nota_inicio"></span></li>
+    <li>Las variaciones mes a mes se calculan con las cifras del informe; las que muestra Meta se citan como referencia y pueden diferir.</li>
+    <li>Las visualizaciones totales están redondeadas por Meta; la suma Instagram + Facebook puede variar levemente.</li>
+    <li>No hay datos de Google Ads, seguidores, prospectos, cotizaciones ni pólizas vendidas.</li>
+  </ul>
+</details>
+
+<footer class="ei-footer"><span><span data-fijo="cliente"></span> · Informe de marketing y publicidad · <span data-periodo></span></span><span>Elaborado por <span data-fijo="agencia"></span></span></footer>
+
+</div></div>
+
+<!-- DATOS DEL INFORME: se actualizan cada mes -->
+<script id="datos-informe" type="application/json">
+{"version": 1, "cliente": "Estrella Insurance #375", "contacto": "Daniel Geraldino", "agencia": "Boudin Agency", "mercado": "Brandon, Florida (EE. UU.)", "moneda": "pesos colombianos (COP)", "iva": 0.19, "actualizado": "2026-11-06", "nota_inicio": "El historial empieza en septiembre de 2026. Agosto no se incluye: fue un periodo de arranque de unas dos semanas, dedicado a la implementación de las plataformas.", "meses": [{"id": "2026-09", "nombre": "Septiembre", "anio": 2026, "instagram": {"visualizaciones": 4900, "vis_instagram": 4886, "vis_facebook": 34, "alcance": 3200, "interacciones": 108, "clics": 42, "visitas_perfil": 82}, "instagram_var_meta": {"visualizaciones": -0.252, "alcance": -0.251, "interacciones": -0.403, "clics": -0.344, "visitas_perfil": -0.406}, "inversion_registrada": 1711736, "criterio": "Consolidado de Ads Manager (11 campañas)", "campanas_total": 11, "consolidado": {"alcance": 19960, "impresiones": 37328, "cpm": 45857, "frecuencia": 1.91}, "campanas": [{"id": "sep_traf_ig", "nivel": "Campaña", "padre": "", "nombre": "Tráfico a Instagram", "objetivo": "Tráfico a Instagram", "formato": "", "inversion": 85960, "resultado_tipo": "Visitas al perfil", "resultados": 111, "costo_resultado": 774, "alcance": 896, "impresiones": 1105, "cpm": 77792, "frecuencia": 1.23, "ctr": 0.067, "ctr_adicional": null, "nota": ""}, {"id": "sep_msj", "nivel": "Campaña", "padre": "", "nombre": "Mensajes por WhatsApp", "objetivo": "Mensajes", "formato": "", "inversion": 516205, "resultado_tipo": "Conversaciones", "resultados": 10, "costo_resultado": 51621, "alcance": 2687, "impresiones": 4214, "cpm": 122498, "frecuencia": 1.57, "ctr": 0.0112, "ctr_adicional": null, "nota": ""}, {"id": "sep_msj_prueba", "nivel": "Conjunto", "padre": "sep_msj", "nombre": "Conjunto prueba", "objetivo": "Mensajes", "formato": "", "inversion": 382689, "resultado_tipo": "Conversaciones", "resultados": 6, "costo_resultado": null, "alcance": null, "impresiones": null, "cpm": null, "frecuencia": null, "ctr": null, "ctr_adicional": null, "nota": ""}, {"id": "sep_msj_videos", "nivel": "Conjunto", "padre": "sep_msj", "nombre": "Conjunto videos", "objetivo": "Mensajes", "formato": "Video", "inversion": 133516, "resultado_tipo": "Conversaciones", "resultados": 4, "costo_resultado": null, "alcance": null, "impresiones": null, "cpm": null, "frecuencia": null, "ctr": null, "ctr_adicional": null, "nota": ""}, {"id": "sep_ventas", "nivel": "Campaña", "padre": "", "nombre": "Ventas / Landing", "objetivo": "Ventas / landing", "formato": "", "inversion": 36382, "resultado_tipo": "Resultados de píxel", "resultados": null, "costo_resultado": null, "alcance": 565, "impresiones": 738, "cpm": null, "frecuencia": null, "ctr": null, "ctr_adicional": null, "nota": "Sin resultados de píxel registrados."}, {"id": "sep_traf_gen", "nivel": "Campaña", "padre": "", "nombre": "Tráfico general", "objetivo": "Tráfico general", "formato": "", "inversion": 764447, "resultado_tipo": "Clics en enlaces", "resultados": 352, "costo_resultado": 2172, "alcance": 13858, "impresiones": 26413, "cpm": 28942, "frecuencia": 1.91, "ctr": 0.0148, "ctr_adicional": null, "nota": ""}, {"id": "sep_traf_gen_x", "nivel": "Conjunto", "padre": "sep_traf_gen", "nombre": "Conjunto X", "objetivo": "Tráfico general", "formato": "", "inversion": 478258, "resultado_tipo": "Visitas a página", "resultados": 213, "costo_resultado": null, "alcance": null, "impresiones": null, "cpm": null, "frecuencia": null, "ctr": null, "ctr_adicional": null, "nota": ""}, {"id": "sep_traf_gen_llamadas", "nivel": "Conjunto", "padre": "sep_traf_gen", "nombre": "Conjunto llamadas", "objetivo": "Tráfico general", "formato": "", "inversion": 286189, "resultado_tipo": "Llamadas", "resultados": 3, "costo_resultado": null, "alcance": null, "impresiones": null, "cpm": null, "frecuencia": null, "ctr": null, "ctr_adicional": null, "nota": ""}], "texto": {"etapa": "Experimentación y adaptación", "etapa_puntos": ["Diversificación: tráfico, mensajes, landing y llamadas.", "Adaptación a las políticas de Meta para seguros.", "Primeros videos y ajustes de comunicación."], "resumen": "Septiembre fue un periodo de experimentación. Se diversificaron los objetivos publicitarios (tráfico, mensajes, páginas de destino y llamadas) y se trabajó en adaptar los anuncios a las políticas de Meta para seguros en Estados Unidos. Se lograron las primeras {{2026-09.conversaciones|int}} conversaciones por WhatsApp.", "publicidad": "Ads Manager reporta {{2026-09.inversion|cop}} (con IVA) en {{2026-09.campanas_total|int}} campañas, con alcance de {{2026-09.alcance_consolidado|int}}, {{2026-09.impresiones_consolidado|int}} impresiones, CPM de {{2026-09.cpm_consolidado|cop}} y frecuencia de {{2026-09.frecuencia_consolidado|dec}}. Las {{2026-09.campanas_identificadas|int}} campañas con detalle suman {{2026-09.subtotal_identificado|cop}}; los {{2026-09.sin_asignar|cop}} restantes no se asignan a ninguna campaña. La campaña de mensajes generó {{sep_msj.resultados|int}} conversaciones, con CPM de {{sep_msj.cpm|cop}} y CTR de {{sep_msj.ctr|pct2}}. La de tráfico general sumó {{sep_traf_gen.resultados|int}} clics a {{sep_traf_gen.costo|cop}}, con alcance de {{sep_traf_gen.alcance|int}} y CTR de {{sep_traf_gen.ctr|pct2}}.", "positivos": ["Primeras {{2026-09.conversaciones|int}} conversaciones del proyecto.", "Costo por visita al perfil de {{sep_traf_ig.costo|cop}}, con CTR de {{sep_traf_ig.ctr|pct2}}.", "Se probaron cuatro objetivos de campaña distintos."], "negativos": ["Ventas / landing: {{sep_ventas.inversion|cop}} sin resultados de píxel.", "Llamadas a {{sep_traf_gen_llamadas.costo|cop}} cada una.", "El tráfico general se llevó el {{sep_traf_gen.share_mes|pct}} de la inversión del mes sin generar contactos directos más allá de {{sep_traf_gen_llamadas.resultados|int}} llamadas."], "hallazgos": ["Con una inversión menor, el conjunto de videos logró {{sep_msj_videos.resultados|int}} conversaciones ({{sep_msj_videos.inversion|cop}}), frente a {{sep_msj_prueba.resultados|int}} del conjunto prueba ({{sep_msj_prueba.inversion|cop}}).", "Las políticas de categoría especial limitan la segmentación por edad y otros atributos."], "explicacion": ["Se identificó la necesidad de cambiar el enfoque creativo y se propuso una nueva línea de producción audiovisual, con contenido más cercano al público. Se probaron campañas de tráfico hacia Instagram, mensajes por WhatsApp, tráfico a páginas de destino, captación de llamadas y conversiones.", "Uno de los retos más importantes fue configurar campañas del sector asegurador en Estados Unidos: las políticas de Meta para categorías especiales limitan la segmentación y exigen cuidado en la comunicación. Fue necesario probar distintos mensajes, estructuras y enfoques creativos."], "conclusion": "Septiembre permitió identificar las limitaciones técnicas y creativas y ampliar las pruebas de captación. Dejó la información para decidir la estructura de campañas y el tipo de contenido.", "nota_instagram": "Septiembre es el primer mes del informe, por eso no se compara con el mes anterior."}}, {"id": "2026-10", "nombre": "Octubre", "anio": 2026, "instagram": {"visualizaciones": 15000, "vis_instagram": 14960, "vis_facebook": 47, "alcance": 7700, "interacciones": 391, "clics": 151, "visitas_perfil": 277}, "instagram_var_meta": {"visualizaciones": 1.944, "alcance": 1.265, "interacciones": 2.587, "clics": 1.904, "visitas_perfil": 2.112}, "inversion_registrada": 2045208, "criterio": "Suma de las 3 campañas identificadas en las capturas", "campanas_total": 3, "consolidado": null, "campanas": [{"id": "oct_traf", "nivel": "Campaña", "padre": "", "nombre": "Tráfico", "objetivo": "Tráfico a Instagram", "formato": "", "inversion": 157645, "resultado_tipo": "Visitas al perfil", "resultados": 91, "costo_resultado": 1732, "alcance": 2229, "impresiones": 2995, "cpm": 52636, "frecuencia": 1.34, "ctr": null, "ctr_adicional": null, "nota": "CTR no disponible en las capturas."}, {"id": "oct_msj1", "nivel": "Campaña", "padre": "", "nombre": "Primera campaña de mensajes", "objetivo": "Mensajes", "formato": "", "inversion": 695577, "resultado_tipo": "Conversaciones", "resultados": 12, "costo_resultado": 57965, "alcance": 3564, "impresiones": 6384, "cpm": 108956, "frecuencia": 1.79, "ctr": 0.01, "ctr_adicional": null, "nota": ""}, {"id": "oct_msj2", "nivel": "Campaña", "padre": "", "nombre": "Segunda campaña de mensajes", "objetivo": "Mensajes", "formato": "", "inversion": 1191986, "resultado_tipo": "Conversaciones", "resultados": 18, "costo_resultado": 66221, "alcance": 6499, "impresiones": 15205, "cpm": 78394, "frecuencia": 2.34, "ctr": 0.0094, "ctr_adicional": 0.0065, "nota": "Campaña actualmente desactivada."}, {"id": "oct_msj2_videos", "nivel": "Conjunto", "padre": "oct_msj2", "nombre": "Conjunto videos", "objetivo": "Mensajes", "formato": "Video", "inversion": 820809, "resultado_tipo": "Conversaciones", "resultados": 18, "costo_resultado": 45601, "alcance": 3962, "impresiones": 7234, "cpm": 113465, "frecuencia": 1.83, "ctr": 0.0127, "ctr_adicional": 0.0068, "nota": ""}, {"id": "oct_msj2_imagenes", "nivel": "Conjunto", "padre": "oct_msj2", "nombre": "Conjunto imágenes", "objetivo": "Mensajes", "formato": "Imagen", "inversion": 371177, "resultado_tipo": "Conversaciones", "resultados": 0, "costo_resultado": null, "alcance": 2530, "impresiones": 7971, "cpm": 46566, "frecuencia": 3.15, "ctr": 0.0064, "ctr_adicional": 0.0063, "nota": ""}], "texto": {"etapa": "Optimización creativa y crecimiento", "etapa_puntos": ["Recuperación de todos los indicadores de Instagram.", "Videos con asesores como formato ganador.", "Mayor inversión en campañas de mensajes."], "resumen": "Octubre fue el mes de mayor crecimiento. Todos los indicadores de Instagram mejoraron, las campañas de mensajes se fortalecieron y se confirmó la diferencia entre formatos: el conjunto de videos generó {{oct_msj2_videos.resultados|int}} conversaciones y el de imágenes ninguna.", "publicidad": "Inversión total con IVA: {{2026-10.inversion|cop}} en {{2026-10.campanas_identificadas|int}} campañas identificadas. Se registraron {{2026-10.conversaciones|int}} conversaciones. El conjunto de videos: CPM {{oct_msj2_videos.cpm|cop}}, frecuencia {{oct_msj2_videos.frecuencia|dec}}, CTR {{oct_msj2_videos.ctr|pct2}}. El de imágenes: CPM {{oct_msj2_imagenes.cpm|cop}}, frecuencia {{oct_msj2_imagenes.frecuencia|dec}}, CTR {{oct_msj2_imagenes.ctr|pct2}}. La segunda campaña de mensajes está desactivada.", "positivos": ["Conversaciones ×{{2026-10.conversaciones_x|int}} frente a septiembre.", "Mejor mes en los cinco indicadores de Instagram: visualizaciones {{2026-10.visualizaciones_var|spct}}, clics {{2026-10.clics_var|spct}}.", "Videos: {{oct_msj2_videos.resultados|int}} conversaciones, el conjunto que más aportó."], "negativos": ["Imágenes: {{oct_msj2_imagenes.inversion|cop}} sin conversaciones.", "Costo por visita al perfil {{2026-10.costo_visita_var|spct}} frente a septiembre."], "hallazgos": ["Imágenes con CPM más bajo ({{oct_msj2_imagenes.cpm|cop}}) pero sin conversaciones: llegar barato no es convertir.", "Las imágenes absorbieron el {{oct_msj2_imagenes.share_padre|pct}} de la segunda campaña de mensajes."], "explicacion": ["A partir de los aprendizajes anteriores se ajustó la producción creativa: nuevas ideas, guiones y formatos audiovisuales con un enfoque más humano, para que los usuarios conozcan a las personas detrás de la empresa y reciban la información de forma natural.", "El principal aprendizaje fue que los videos en los que una asesora o representante explica los servicios, resuelve dudas y comparte recomendaciones generan más interés que las piezas estáticas. Se desarrollaron campañas de mensajes por WhatsApp, tráfico a los canales digitales y captación de personas interesadas en seguros personales y comerciales, y se amplió la inversión en mensajes."], "conclusion": "Octubre es un avance importante en la optimización. La comunicación humana y audiovisual debe ser uno de los pilares de la estrategia.", "nota_instagram": "Las variaciones que muestra Meta para octubre no coinciden con las cifras mensuales del informe (por ejemplo, en clics); el informe usa las calculadas."}}], "analisis": {"mes": "2026-10", "hechos": [["En octubre todos los indicadores de Instagram crecieron entre {{2026-10.alcance_var|spct}} y {{2026-10.interacciones_var|spct}} frente a septiembre.", "El nuevo contenido audiovisual con personas reales, más cercano, pudo impulsar el crecimiento. La mayor inversión publicitaria del mes también aumenta la exposición. No es posible separar ambos efectos con estos datos."], ["En octubre, el conjunto de videos generó {{oct_msj2_videos.resultados|int}} conversaciones y el de imágenes ninguna. En septiembre, el conjunto de videos logró {{sep_msj_videos.resultados|int}} con menos inversión que el conjunto prueba.", "Ver a una persona de la empresa explicando el servicio genera más confianza en un producto como el seguro. Se repite en los dos meses, pero se basa en pocos conjuntos y pocas conversaciones."], ["El conjunto de imágenes de octubre llegó a una frecuencia de {{oct_msj2_imagenes.frecuencia|dec}}, frente a {{oct_msj2_videos.frecuencia|dec}} del conjunto de videos.", "Mostrar la misma imagen muchas veces a las mismas personas pudo causar fatiga del anuncio y bajo interés."]], "oportunidades": ["<b>Mover la inversión de imágenes a videos.<\/b> En octubre, {{oct_msj2_imagenes.inversion|cop}} no generaron conversaciones.", "<b>Controlar la frecuencia.<\/b> Rotar creativos cuando un conjunto supere unos 3 impactos por persona.", "<b>Escalar los videos con asesores<\/b>, el formato que más conversaciones generó.", "<b>Medir el paso de conversación a cliente<\/b>: prospectos calificados, cotizaciones y pólizas.", "<b>Unificar el registro de inversión<\/b> con el consolidado mensual de Ads Manager para comparar meses en igualdad de condiciones.", "<b>Incorporar los datos de Google Ads<\/b> para medir su aporte.", "<b>Revisar llamadas y landing<\/b> antes de reinvertir: en septiembre, {{sep_traf_gen_llamadas.resultados|int}} llamadas costaron {{sep_traf_gen_llamadas.costo|cop}} cada una y la campaña de ventas no registró resultados."], "dificultades": ["<b>Producción creativa inicial:<\/b> el contenido no transmitía la identidad ni la cercanía de la marca.", "<b>Falta de material audiovisual:<\/b> limitó los anuncios con personas explicando los servicios.", "<b>Restricciones publicitarias:<\/b> las políticas para seguros en EE. UU. limitaron la segmentación.", "<b>Etapa de aprendizaje:<\/b> fue necesario probar lenguajes y objetivos distintos.", "<b>Optimización de conversiones:<\/b> aún hay que bajar el costo de captación y medir cuántos contactos se convierten en clientes."], "aprendizajes": ["Los videos con personas reales superan a las imágenes estáticas probadas para generar conversaciones.", "La comunicación debe resolver dudas y transmitir confianza.", "Conviene tener anuncios específicos para seguros personales y comerciales.", "La estrategia debe contemplar varias vías de contacto, no solo WhatsApp.", "Las campañas deben evaluarse por la calidad de los contactos, no solo por el volumen.", "Las interacciones permiten futuras acciones de remarketing, respetando las políticas de privacidad y publicidad."], "plan": {"titulo": "Estrategia recomendada para noviembre", "intro": "Mantener el foco en la generación de contactos y en la comunicación audiovisual.", "bloques": [{"titulo": "Producción de contenido", "puntos": ["Más videos con asesores de la empresa.", "Videos sobre seguros de vehículos personales.", "Contenido para vehículos comerciales.", "Guiones con preguntas frecuentes.", "Testimonios reales cuando estén disponibles y autorizados.", "Contenido educativo sobre coberturas, requisitos y beneficios."]}, {"titulo": "Meta Ads", "puntos": ["Mantener campañas de mensajes.", "Priorizar los creativos con mejores resultados (videos).", "Probar variaciones de guiones y formatos.", "Aumentar el volumen de conversaciones con los formatos que mejor funcionan.", "Remarketing con audiencias permitidas y consentimientos.", "Revisión periódica de los conjuntos y su frecuencia."]}, {"titulo": "Google Ads", "puntos": ["Búsqueda: seguros de vehículos personales.", "Búsqueda: seguros de vehículos comerciales.", "Consultas de cotización en Brandon y zonas cercanas.", "Incorporar sus datos al próximo informe para medir su aporte."]}, {"titulo": "Medición comercial", "puntos": ["Registrar cada contacto y su avance hasta la venta.", "Calcular el costo por cliente adquirido."], "embudo": true}]}, "conclusion": ["Septiembre diversificó los objetivos de campaña, enseñó a trabajar con las restricciones del sector asegurador y produjo las primeras conversaciones. Octubre fue el mes de mayor avance: todos los indicadores de Instagram crecieron y las conversaciones llegaron a {{2026-10.conversaciones|int}}.", "El resultado estratégico más importante fue identificar que la comunicación audiovisual con representantes de la empresa genera confianza e interés. El siguiente reto es aumentar el volumen de conversaciones y medir cuántos contactos se convierten en clientes."], "frase": "La prioridad para los próximos meses es pasar de una etapa de experimentación a una etapa de optimización y crecimiento sostenido."}}
+</script>
+<script>(() => {
+  'use strict';
+  const D = JSON.parse(document.getElementById('datos-informe').textContent);
+  const IVA = 1 + D.iva;
+  const MESES = [...D.meses].sort((a, b) => a.id.localeCompare(b.id));
+  const BY_ID = Object.fromEntries(MESES.map((m) => [m.id, m]));
+  const ORG = [
+    ['visualizaciones', 'Visualizaciones', 'Veces que se vio el contenido.'],
+    ['alcance', 'Alcance', 'Cuentas distintas que vieron el contenido en el mes.'],
+    ['interacciones', 'Interacciones', 'Me gusta, comentarios, guardados y compartidos.'],
+    ['clics', 'Clics en enlaces', 'Clics hacia enlaces externos del perfil.'],
+    ['visitas_perfil', 'Visitas al perfil', 'Visitas al perfil de Instagram.'],
+  ];
+
+  /* ---------- formato ---------- */
+  const group = (s) => s.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const num = (v, d) => { const n = v < 0; const [i, f] = Math.abs(v).toFixed(d).split('.'); return (n ? '−' : '') + group(i) + (f ? ',' + f : ''); };
+  const fmt = (v, t) => {
+    if (v === null || v === undefined || Number.isNaN(v)) return 'No disponible';
+    switch (t) {
+      case 'cop': return '$' + num(Math.round(v), 0);
+      case 'pct': return num(v * 100, 1) + '%';
+      case 'pct2': return num(v * 100, 2) + '%';
+      case 'spct': return (v > 0 ? '+' : '') + num(v * 100, 1) + '%';
+      case 'dec': return num(v, 2);
+      case 'x': return num(v, 1);
+      default: return num(Math.round(v), 0);
+    }
+  };
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const iva = (v) => (v === null || v === undefined ? v : v * IVA);
+  const sum = (a, f) => a.reduce((s, x) => s + (f(x) || 0), 0);
+  const tone = (v, sentido) => (v === null || v === undefined || sentido === 'neutral' || v === 0 ? 'neu' : (v > 0) === (sentido !== 'down') ? 'pos' : 'neg');
+  const multiYear = new Set(MESES.map((m) => m.anio)).size > 1;
+  const largo = (id) => BY_ID[id].nombre + ' ' + BY_ID[id].anio;
+  const corto = (id) => BY_ID[id].nombre.slice(0, 3) + (multiYear ? ' ' + String(BY_ID[id].anio).slice(2) : '');
+  const minus = (id) => BY_ID[id].nombre.toLowerCase();
+  const lista = (xs) => (xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' y ' + xs[xs.length - 1]);
+
+  /* ---------- métricas por mes (montos con IVA) ---------- */
+  const M = {};
+  const K = {};
+  const VARS = ['conversaciones', 'inversion', 'inversion_mensajes', 'visitas_pagadas', 'costo_visita', ...ORG.map((o) => o[0])];
+  MESES.forEach((m, i) => {
+    const camp = m.campanas.filter((c) => c.nivel === 'Campaña');
+    const msj = camp.filter((c) => c.objetivo === 'Mensajes');
+    const tr = camp.filter((c) => c.objetivo === 'Tráfico a Instagram');
+    const sub = sum(camp, (c) => c.inversion);
+    const r = {
+      conversaciones: sum(msj, (c) => c.resultados), inversion: iva(m.inversion_registrada), inversion_sin_iva: m.inversion_registrada,
+      inversion_mensajes: iva(sum(msj, (c) => c.inversion)), visitas_pagadas: sum(tr, (c) => c.resultados), inversion_trafico: iva(sum(tr, (c) => c.inversion)),
+      campanas_total: m.campanas_total, campanas_identificadas: camp.length, subtotal_identificado: iva(sub), sin_asignar: iva(m.inversion_registrada - sub),
+      vis_instagram: m.instagram.vis_instagram, vis_facebook: m.instagram.vis_facebook,
+      share_instagram: m.instagram.vis_instagram / (m.instagram.vis_instagram + m.instagram.vis_facebook),
+      alcance_consolidado: m.consolidado ? m.consolidado.alcance : null, impresiones_consolidado: m.consolidado ? m.consolidado.impresiones : null,
+      cpm_consolidado: m.consolidado ? iva(m.consolidado.cpm) : null, frecuencia_consolidado: m.consolidado ? m.consolidado.frecuencia : null,
+      videos_conversaciones: sum(m.campanas.filter((c) => c.formato === 'Video'), (c) => c.resultados),
+      prev: i ? MESES[i - 1].id : null,
+    };
+    r.costo_visita = r.visitas_pagadas ? r.inversion_trafico / r.visitas_pagadas : null;
+    for (const [k] of ORG) { r[k] = m.instagram[k]; r[k + '_meta'] = m.instagram_var_meta ? m.instagram_var_meta[k] ?? null : null; }
+    M[m.id] = r;
+    const msjRaw = sum(msj, (c) => c.inversion);
+    for (const c of m.campanas) {
+      const padre = m.campanas.find((p) => p.id === c.padre);
+      const set = (f, v) => { K[c.id + '.' + f] = v === undefined ? null : v; };
+      set('inversion', iva(c.inversion)); set('resultados', c.resultados); set('alcance', c.alcance); set('impresiones', c.impresiones);
+      set('cpm', iva(c.cpm)); set('frecuencia', c.frecuencia); set('ctr', c.ctr); set('ctr_adicional', c.ctr_adicional);
+      set('costo', c.resultado_tipo === 'Conversaciones' ? null : iva(c.resultados ? c.inversion / c.resultados : c.costo_resultado));
+      set('share_mes', c.inversion / m.inversion_registrada); set('share_padre', padre ? c.inversion / padre.inversion : null);
+      set('share_msj', msjRaw ? c.inversion / msjRaw : null);
+    }
+  });
+  MESES.forEach((m) => {
+    const r = M[m.id]; const p = r.prev ? M[r.prev] : null;
+    for (const k of VARS) { r[k + '_var'] = p && p[k] ? r[k] / p[k] - 1 : null; r[k + '_x'] = p && p[k] ? r[k] / p[k] : null; }
+    for (const [k, v] of Object.entries(r)) if (typeof v === 'number' || v === null) K[m.id + '.' + k] = v;
+  });
+
+  /* textos con cifras: {{clave|formato}} y <b>…</b> */
+  const tx = (s) => String(s ?? '').split(/(\{\{[^}]+\}\})/).map((part) => {
+    const t = part.match(/^\{\{([^|}]+)\|([^}]+)\}\}$/);
+    if (t) return '<b class="ei-n">' + esc(fmt(K[t[1]], t[2])) + '</b>';
+    return esc(part).replace(/&lt;(\/?)b&gt;/g, '<$1b>');
+  }).join('');
+
+  /* ---------- selección de meses ---------- */
+  const PRESETS = [['ultimo', 'Último mes', 1], ['bim', 'Bimestre', 2], ['tri', 'Trimestre', 3], ['sem', 'Semestre', 6], ['todo', 'Todos', Infinity]];
+  const ids = MESES.map((m) => m.id);
+  const ultimos = (n) => ids.slice(Math.max(0, ids.length - n));
+  let preset = ids.length >= 3 ? 'tri' : ids.length >= 2 ? 'bim' : 'ultimo';
+  let sel = ultimos(PRESETS.find((p) => p[0] === preset)[2]);
+  try { const saved = JSON.parse(localStorage.getItem('ei-seleccion') || 'null'); if (saved && saved.sel.every((x) => BY_ID[x]) && saved.sel.length) { preset = saved.preset; sel = saved.sel; } } catch (e) { /* sin almacenamiento */ }
+  const guardar = () => { try { localStorage.setItem('ei-seleccion', JSON.stringify({ preset, sel })); } catch (e) { /* sin almacenamiento */ } };
+
+  const periodoTexto = () => {
+    if (sel.length === 1) return largo(sel[0]);
+    const idx = sel.map((x) => ids.indexOf(x));
+    const contiguo = idx.every((v, i) => !i || v === idx[i - 1] + 1);
+    const a = BY_ID[sel[0]], b = BY_ID[sel[sel.length - 1]];
+    if (contiguo) return a.anio === b.anio ? `${a.nombre} – ${b.nombre} ${b.anio}` : `${largo(a.id)} – ${largo(b.id)}`;
+    return lista(sel.map((x) => (multiYear ? largo(x) : BY_ID[x].nombre))) + (multiYear ? '' : ' ' + b.anio);
+  };
+
+  /* ---------- piezas ---------- */
+  const $ = (id) => document.getElementById(id);
+  const tile = (label, value, delta, def, main) => `<div class="ei-tile${main ? ' is-main' : ''}"><div class="ei-tile-label">${label}</div><div class="ei-tile-value">${value}</div><div class="ei-tile-delta ${delta.c}">${delta.t}</div><div class="ei-tile-def">${def}</div></div>`;
+  const ultimoVsPrevio = (k, sentido) => {
+    const L = sel[sel.length - 1]; const r = M[L];
+    const v = r[k + '_var'];
+    if (!r.prev) return { t: 'Primer mes del informe', c: 'neu' };
+    if (v === null) return { t: `${BY_ID[L].nombre} vs. ${minus(r.prev)}: sin base de comparación`, c: 'neu' };
+    return { t: (v > 0 ? '▲ ' : v < 0 ? '▼ ' : '') + fmt(v, 'spct') + ` ${minus(L)} vs. ${minus(r.prev)}`, c: tone(v, sentido) };
+  };
+  const total = (k) => sum(sel, (x) => M[x][k]);
+  const tabla = (head, rows, cls = '') => `<div class="ei-table-wrap ${cls}"><table><thead><tr>${head.map((h) => `<th class="${h[1] || ''}">${h[0]}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+
+  const comparativo = () => {
+    const IND = [
+      ['conversaciones', 'Conversaciones por WhatsApp', 'up', 'int'],
+      ['inversion_mensajes', 'Inversión en campañas de mensajes', 'neutral', 'cop'],
+      ['inversion', 'Inversión registrada en Meta Ads', 'neutral', 'cop'],
+      ...ORG.map(([k, n]) => [k, n, 'up', 'int']),
+      ['visitas_pagadas', 'Visitas al perfil por campañas de tráfico', 'up', 'int'],
+      ['costo_visita', 'Costo por visita al perfil (pagada)', 'down', 'cop'],
+    ];
+    return IND.map(([k, nombre, sentido, formato]) => {
+      const vals = sel.map((x) => [x, M[x][k]]).filter(([, v]) => v !== null);
+      let mejor = null, peor = null;
+      if (sentido !== 'neutral' && vals.length > 1) {
+        const s = [...vals].sort((a, b) => (sentido === 'up' ? b[1] - a[1] : a[1] - b[1]));
+        mejor = s[0][0]; peor = s[s.length - 1][0];
+      }
+      const desde = vals.find(([, v]) => v !== 0);
+      const L = sel[sel.length - 1];
+      const cambio = desde && desde[0] !== L && M[L][k] !== null ? M[L][k] / desde[1] - 1 : null;
+      let estado = 'Sin comparación';
+      if (cambio !== null) estado = sentido === 'neutral' ? (cambio > 0 ? 'Aumentó' : 'Disminuyó') : (cambio > 0) === (sentido === 'up') ? 'Mejoró' : 'Empeoró';
+      return { k, nombre, sentido, formato, vals: sel.map((x) => M[x][k]), mejor, peor, desde: desde ? desde[0] : null, cambio, estado };
+    });
+  };
+
+  /* ---------- render ---------- */
+  function render() {
+    const per = periodoTexto();
+    const L = sel[sel.length - 1];
+    const varios = sel.length > 1;
+    document.title = `${D.cliente} · Informe ${per}`;
+    document.querySelectorAll('[data-periodo]').forEach((e) => { e.textContent = per; });
+
+    // controles
+    $('presets').innerHTML = PRESETS.map(([id, label, n]) => {
+      const off = n !== Infinity && ids.length < n;
+      return `<button type="button" data-preset="${id}" aria-pressed="${preset === id}" ${off ? 'disabled title="Aún no hay suficientes meses cargados"' : ''}>${label}</button>`;
+    }).join('');
+    $('meses').innerHTML = MESES.map((m) => `<button type="button" class="ei-chipbtn" data-mes="${m.id}" aria-pressed="${sel.includes(m.id)}">${esc(corto(m.id))}</button>`).join('');
+
+    // titular
+    const conv = total('conversaciones');
+    const vid = total('videos_conversaciones');
+    let head = sel.length === 1
+      ? `En ${minus(L)} se registraron <b>${fmt(conv)}</b> conversaciones por WhatsApp.`
+      : sel.length <= 4
+        ? `Las conversaciones por WhatsApp fueron ${lista(sel.map((x) => `<b>${fmt(M[x].conversaciones)}</b> en ${minus(x)}`))}: <b>${fmt(conv)}</b> en total.`
+        : `Las conversaciones por WhatsApp pasaron de <b>${fmt(M[sel[0]].conversaciones)}</b> en ${minus(sel[0])} a <b>${fmt(M[L].conversaciones)}</b> en ${minus(L)}, con <b>${fmt(conv)}</b> en total.`;
+    if (vid > 0 && conv > 0) head += ` Los conjuntos de video con asesores aportaron <b>${fmt(vid)}</b> de ellas (<b>${fmt(vid / conv, 'pct')}</b>).`;
+    $('headline').innerHTML = head;
+    $('mostrando').textContent = varios
+      ? `Mostrando ${per}: cifras sumadas de ${sel.length} meses. La variación de cada tarjeta compara ${minus(L)} con el mes anterior. Las cifras de Instagram son acumuladas y pueden incluir usuarios repetidos. Montos con IVA del ${num(D.iva * 100, 0)}%.`
+      : `Mostrando ${per}, comparado con el mes anterior. Montos con IVA del ${num(D.iva * 100, 0)}%.`;
+
+    // KPI
+    $('kpi-main').innerHTML = [
+      tile('Conversaciones por WhatsApp', fmt(conv), ultimoVsPrevio('conversaciones', 'up'), 'Personas que iniciaron un chat desde un anuncio de mensajes. Es el indicador más cercano a un cliente potencial.', true),
+      tile('Inversión en mensajes', fmt(total('inversion_mensajes'), 'cop'), ultimoVsPrevio('inversion_mensajes', 'neutral'), 'Lo invertido, con IVA, en las campañas que buscan conversaciones por WhatsApp.'),
+      tile('Inversión publicitaria registrada', fmt(total('inversion'), 'cop'), ultimoVsPrevio('inversion', 'neutral'), `Total de Meta Ads con IVA del ${num(D.iva * 100, 0)}%. Sin datos de Google Ads.`),
+    ].join('');
+    $('kpi-org').innerHTML = ORG.map(([k, n, def]) => tile(n, fmt(total(k)), ultimoVsPrevio(k, 'up'), def)).join('');
+
+    // conversaciones
+    const maxC = Math.max(1, ...sel.map((x) => M[x].conversaciones));
+    $('conv-chart').innerHTML = `<div class="ei-cols" style="grid-template-columns:repeat(${sel.length},minmax(0,1fr))">${sel.map((x) => `
+      <div class="ei-col is-on"><div class="ei-col-val">${fmt(M[x].conversaciones)}</div>
+      <div class="ei-col-track"><div class="ei-col-bar${M[x].conversaciones === 0 ? ' is-zero' : ''}" style="height:${Math.max(M[x].conversaciones / maxC * 100, 1.5)}%" title="${esc(largo(x))}: ${fmt(M[x].conversaciones)} conversaciones"></div></div>
+      <div class="ei-col-lab">${esc(sel.length > 4 ? corto(x) : BY_ID[x].nombre)}</div>
+      <div class="ei-col-sub"><span>Inversión en mensajes</span><span>${fmt(M[x].inversion_mensajes, 'cop')}</span></div></div>`).join('')}</div>`;
+    $('conv-intro').innerHTML = varios
+      ? `Las conversaciones son el resultado más importante: cada una es una persona que escribió a la empresa por WhatsApp desde un anuncio. ${BY_ID[L].nombre} aportó el <b>${fmt(conv ? M[L].conversaciones / conv : null, 'pct')}</b> del periodo.`
+      : 'Las conversaciones son el resultado más importante: cada una es una persona que escribió a la empresa por WhatsApp desde un anuncio.';
+    const traf = sel.flatMap((x) => BY_ID[x].campanas.filter((c) => c.objetivo === 'Tráfico a Instagram' && c.nivel === 'Campaña').map((c) => [x, c]));
+    $('traf-table').innerHTML = traf.length ? tabla([['Mes'], ['Visitas al perfil', 'num'], ['Inversión (con IVA)', 'num'], ['Costo por visita', 'num'], ['CTR', 'num']],
+      traf.map(([x, c]) => `<tr><td class="ei-td-name">${esc(largo(x))}</td><td class="num">${fmt(c.resultados)}</td><td class="num">${fmt(K[c.id + '.inversion'], 'cop')}</td><td class="num">${fmt(K[c.id + '.costo'], 'cop')}</td><td class="num">${c.ctr === null ? 'No disponible' : fmt(c.ctr, 'pct2')}</td></tr>`))
+      : '<p class="ei-small">No hubo campañas de tráfico a Instagram en los meses elegidos.</p>';
+    const otros = sel.map((x) => {
+      const it = BY_ID[x].campanas.filter((c) => c.objetivo === 'Tráfico general' && c.resultados !== null);
+      return it.length ? `En ${minus(x)}, ${lista(it.map((c) => `${esc(c.nombre.toLowerCase())}: <b>${fmt(c.resultados)}</b> ${esc(c.resultado_tipo.toLowerCase())}`))}.` : '';
+    }).filter(Boolean);
+    $('traf-otros').innerHTML = otros.length ? 'Otras campañas de tráfico: ' + otros.join(' ') : '';
+
+    // visibilidad
+    const F = sel[0];
+    $('vis-intro').innerHTML = varios
+      ? `Entre ${minus(F)} y ${minus(L)}, las visualizaciones cambiaron <b>${fmt(M[F].visualizaciones ? M[L].visualizaciones / M[F].visualizaciones - 1 : null, 'spct')}</b> y los clics <b>${fmt(M[F].clics ? M[L].clics / M[F].clics - 1 : null, 'spct')}</b>. En verde, el mejor mes de cada indicador.`
+      : `Indicadores de Instagram de ${minus(L)}. Elija dos o más meses para ver la evolución.`;
+    $('minis').innerHTML = ORG.map(([k, n]) => {
+      const vals = sel.map((x) => M[x][k]); const max = Math.max(...vals, 1); const best = Math.max(...vals);
+      const ch = varios && M[F][k] ? M[L][k] / M[F][k] - 1 : null;
+      return `<div class="ei-card"><div class="ei-mini-head"><h3>${n}</h3>${ch === null ? '' : `<span class="ei-mini-chg ${tone(ch, 'up')}">${fmt(ch, 'spct')}</span>`}</div>
+        <div class="ei-mini-box"><div class="ei-mini" style="grid-template-columns:repeat(${sel.length},minmax(0,1fr))">${sel.map((x) => `<div class="ei-mini-col${M[x][k] === best ? ' is-on' : ''}"><div class="ei-mini-val">${fmt(M[x][k])}</div><div class="ei-mini-track"><div class="ei-mini-bar" style="height:${M[x][k] / max * 100}%" title="${esc(largo(x))}: ${fmt(M[x][k])}"></div></div><div class="ei-mini-lab">${esc(corto(x))}</div></div>`).join('')}</div></div></div>`;
+    }).join('');
+    $('vis-nota').textContent = varios ? `La cifra junto a cada título es la variación de ${minus(L)} frente a ${minus(F)}.` : '';
+    const P = M[L].prev;
+    $('cambio-card').hidden = !P;
+    if (P) {
+      $('cambio-titulo').textContent = `¿Cuánto cambió cada indicador de ${minus(P)} a ${minus(L)}?`;
+      $('cambio-nota').textContent = `Cada barra muestra la variación de ${minus(L)} frente a ${minus(P)}, con las cifras de los dos meses.`;
+      $('cambio').innerHTML = cambioHTML(P, L);
+    }
+    const comp = comparativo();
+    const compRow = (r, corto_) => `<tr><td class="ei-td-name">${esc(r.nombre)}</td>${r.vals.map((v, i) => `<td class="num${r.mejor === sel[i] ? ' is-best' : r.peor === sel[i] ? ' is-worst' : ''}">${v === null ? 'No aplica' : fmt(v, r.formato)}</td>`).join('')}${corto_ ? '' : `<td class="ei-td-m">${r.mejor ? esc(BY_ID[r.mejor].nombre) : 'No aplica'}</td><td class="ei-td-m">${r.peor ? esc(BY_ID[r.peor].nombre) : 'No aplica'}</td>`}<td class="ei-td-m">${r.desde && r.desde !== L ? esc(corto(r.desde) + ' → ' + corto(L)) : '—'}</td><td class="num ${tone(r.cambio, r.sentido)}">${r.cambio === null ? 'No aplica' : fmt(r.cambio, 'spct')}</td>${corto_ ? '' : `<td class="ei-td-st ${r.estado === 'Mejoró' ? 'pos' : r.estado === 'Empeoró' ? 'neg' : 'neu'}">${r.estado}</td>`}</tr>`;
+    const mesesHead = sel.map((x) => [esc(corto(x)), 'num']);
+    $('tabla-instagram').innerHTML = tabla([['Indicador'], ...mesesHead, ['Tramo'], ['Cambio', 'num']], comp.filter((r) => ORG.some((o) => o[0] === r.k)).map((r) => compRow(r, true)));
+    $('vis-share').innerHTML = `Casi todas las visualizaciones vienen de Instagram (<b>${fmt(M[L].share_instagram, 'pct')}</b> en ${minus(L)}); Facebook aporta una parte mínima.`;
+
+    // inversión
+    const inv = total('inversion'), base = total('inversion_sin_iva');
+    const mayor = sel.reduce((a, b) => (M[b].inversion > M[a].inversion ? b : a));
+    $('inv-intro').innerHTML = `${varios ? `En ${per} se registraron` : `En ${minus(L)} se registraron`} <b>${fmt(inv, 'cop')}</b> en Meta Ads con IVA incluido (<b>${fmt(base, 'cop')}</b> de pauta más <b>${fmt(inv - base, 'cop')}</b> de IVA del ${num(D.iva * 100, 0)}%).` +
+      (varios ? ` El mes de mayor inversión fue ${minus(mayor)} (<b>${fmt(M[mayor].inversion, 'cop')}</b>).` : '');
+    const OBJ = [['Mensajes', 'o-msj'], ['Tráfico a Instagram', 'o-tig'], ['Tráfico general', 'o-tgen'], ['Ventas / landing', 'o-ven'], ['Otros objetivos', 'o-otro'], ['Sin asignar', 'o-sin']];
+    const maxI = Math.max(...sel.map((x) => M[x].inversion));
+    $('inv-chart').innerHTML = `<div class="ei-stack">${sel.map((x) => {
+      const m = BY_ID[x]; const camp = m.campanas.filter((c) => c.nivel === 'Campaña');
+      const known = OBJ.slice(0, 4).map((o) => o[0]);
+      const segs = OBJ.map(([o, cls]) => {
+        const v = o === 'Sin asignar' ? m.inversion_registrada - sum(camp, (c) => c.inversion) : o === 'Otros objetivos' ? sum(camp.filter((c) => !known.includes(c.objetivo)), (c) => c.inversion) : sum(camp.filter((c) => c.objetivo === o), (c) => c.inversion);
+        return v > 0 ? `<div class="ei-sseg ${cls}" style="flex-grow:${v}" title="${esc(largo(x))} · ${o}: ${fmt(iva(v), 'cop')} (${fmt(v / m.inversion_registrada, 'pct')})"></div>` : '';
+      }).join('');
+      return `<div class="ei-stack-row is-on"><div class="ei-stack-lab">${esc(largo(x))}</div><div class="ei-stack-track"><div class="ei-stack-inner" style="width:${M[x].inversion / maxI * 100}%">${segs}</div></div><div class="ei-stack-val">${fmt(M[x].inversion, 'cop')}</div><div class="ei-stack-crit">${esc(m.criterio)}</div></div>`;
+    }).join('')}</div>`;
+
+    // campañas
+    const campRow = (x, c, completo) => {
+      const r = c.resultados === null ? (c.resultado_tipo ? 'Sin resultados registrados' : '—') : `${fmt(c.resultados)} ${esc(c.resultado_tipo.toLowerCase())}`;
+      const costo = K[c.id + '.costo'];
+      const calc = c.resultado_tipo !== 'Conversaciones' && c.costo_resultado === null && c.resultados;
+      const name = `<span>${c.nivel === 'Conjunto' ? '↳ ' : ''}${esc(c.nombre)}</span>${c.formato ? `<span class="ei-chip ${c.formato === 'Video' ? 'is-video' : 'is-img'}">${esc(c.formato)}</span>` : ''}`;
+      return `<tr class="${c.nivel === 'Conjunto' ? 'is-set' : ''}">${completo ? `<td class="ei-td-m">${esc(corto(x))}</td>` : ''}<td class="ei-td-name">${name}</td><td class="ei-td-m">${esc(c.objetivo)}</td><td class="num">${fmt(K[c.id + '.inversion'], 'cop')}</td><td class="${c.resultados === 0 ? 'neg' : ''}">${r}</td><td class="num">${costo === null ? '—' : fmt(costo, 'cop') + (calc ? ' *' : '')}</td>${completo ? `<td class="num">${c.alcance === null ? '—' : fmt(c.alcance)}</td><td class="num">${c.impresiones === null ? '—' : fmt(c.impresiones)}</td><td class="num">${c.cpm === null ? '—' : fmt(K[c.id + '.cpm'], 'cop')}</td><td class="num${c.frecuencia > 3 ? ' neg' : ''}">${c.frecuencia === null ? '—' : fmt(c.frecuencia, 'dec')}</td><td class="num">${c.ctr === null ? '—' : fmt(c.ctr, 'pct2')}</td><td class="ei-td-note">${esc(c.nota || '')}</td>` : ''}</tr>`;
+    };
+    const gapRow = (x, completo) => M[x].sin_asignar > 0.5 ? `<tr class="is-gap">${completo ? `<td class="ei-td-m">${esc(corto(x))}</td>` : ''}<td class="ei-td-name">Diferencia con el consolidado de Ads Manager</td><td class="ei-td-m">Sin asignar</td><td class="num">${fmt(M[x].sin_asignar, 'cop')}</td><td>—</td><td class="num">—</td>${completo ? `<td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="ei-td-note">Campañas del consolidado de ${BY_ID[x].campanas_total} sin detalle en las capturas.</td>` : ''}</tr>` : '';
+    $('tabla-campanas').innerHTML = tabla([['Mes'], ['Campaña / conjunto'], ['Objetivo'], ['Inversión', 'num'], ['Resultado'], ['Costo por resultado', 'num'], ['Alcance', 'num'], ['Impr.', 'num'], ['CPM', 'num'], ['Frec.', 'num'], ['CTR', 'num'], ['Observación']],
+      sel.flatMap((x) => [...BY_ID[x].campanas.map((c) => campRow(x, c, true)), gapRow(x, true)]), 'ei-table-campanas');
+
+    // comparativo
+    $('comp-intro').textContent = varios ? `${BY_ID[L].nombre} frente a ${minus(F)} (o al primer mes con dato). En los costos, bajar es mejorar. Montos con IVA del ${num(D.iva * 100, 0)}%.` : 'Elija dos o más meses para comparar.';
+    $('tabla-comparativo').innerHTML = tabla([['Indicador'], ...mesesHead, ['Mejor mes'], ['Menor rendimiento'], ['Tramo'], ['Cambio', 'num'], ['Resultado']], comp.map((r) => compRow(r, false)));
+    const item = (r) => `<li>${esc(r.nombre)}: <b>${fmt(M[r.desde][r.k], r.formato)}</b> → <b>${fmt(M[L][r.k], r.formato)}</b> (<b class="${tone(r.cambio, r.sentido)}">${fmt(r.cambio, 'spct')}</b>).</li>`;
+    const mej = comp.filter((r) => r.estado === 'Mejoró'), emp = comp.filter((r) => r.estado === 'Empeoró');
+    $('mejoro').innerHTML = mej.length ? mej.map(item).join('') : '<li>Sin indicadores con mejora en la selección.</li>';
+    $('empeoro').innerHTML = emp.length ? emp.map(item).join('') : '<li>Ningún indicador empeoró en la selección.</li>';
+    $('comp-listas').hidden = !varios;
+
+    // análisis vigente
+    const A = D.analisis;
+    $('analisis-titulo').textContent = `Análisis de ${largo(A.mes).toLowerCase()}`;
+    $('hechos').innerHTML = '<div class="ei-fh-h f">Hecho</div><div class="ei-fh-h h">Hipótesis</div>' + A.hechos.map(([h, p]) => `<div>${tx(h)}</div><div>${tx(p)}</div>`).join('');
+    $('oportunidades').innerHTML = A.oportunidades.map((o) => `<li>${tx(o)}</li>`).join('');
+
+    // etapas
+    $('etapas-titulo').textContent = sel.length === 1 ? 'Etapa del mes' : `${['', 'Una', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis'][sel.length] || sel.length} etapas del periodo`;
+    $('etapas-lista').innerHTML = sel.map((x, i) => `<div class="ei-stage" style="border-top-color:${i === sel.length - 1 ? 'var(--ei-green)' : i === sel.length - 2 ? 'var(--ei-orange)' : 'var(--ei-gray)'}"><div class="ei-stage-m">${esc(largo(x))}</div><h3>${esc(BY_ID[x].texto.etapa)}</h3><div class="ei-stage-fig"><div><b>${fmt(M[x].conversaciones)}</b>conversaciones</div><div><b>${fmt(M[x].inversion, 'cop')}</b>inversión</div></div><ul>${BY_ID[x].texto.etapa_puntos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div>`).join('');
+
+    // detalle por mes
+    $('detalle-lista').innerHTML = sel.map((x) => {
+      const m = BY_ID[x], t = m.texto, r = M[x];
+      const orgRows = ORG.map(([k, n]) => `<tr><td class="ei-td-name">${n}</td><td class="num">${fmt(r[k])}</td><td class="num ei-td-m">${r.prev ? fmt(M[r.prev][k]) : 'No aplica'}</td><td class="num ${tone(r[k + '_var'], 'up')}">${r[k + '_var'] === null ? 'No aplica' : fmt(r[k + '_var'], 'spct')}</td><td class="num ei-td-m">${r.prev && r[k + '_meta'] !== null ? fmt(r[k + '_meta'], 'spct') : 'No aplica'}</td></tr>`);
+      const campRows = [...m.campanas.map((c) => campRow(x, c, false)), gapRow(x, false)];
+      return `<article class="ei-month" id="mes-${x}">
+        <div class="ei-month-head"><h3>${esc(largo(x))}</h3><span>${esc(t.etapa)}</span></div>
+        <h4>Resumen general</h4><p>${tx(t.resumen)}</p>
+        <h4>Métricas de Instagram</h4>${tabla([['Indicador'], [esc(m.nombre), 'num'], [r.prev ? esc(BY_ID[r.prev].nombre) : 'Mes anterior', 'num'], ['Variación calculada', 'num'], ['Variación según Meta', 'num']], orgRows)}
+        <p class="ei-small" style="margin-top:8px">${tx(t.nota_instagram || '')} Visualizaciones: Instagram <b>${fmt(r.vis_instagram)}</b>, Facebook <b>${fmt(r.vis_facebook)}</b>.</p>
+        <h4>Resultados publicitarios</h4>${tabla([['Campaña / conjunto'], ['Objetivo'], ['Inversión', 'num'], ['Resultado'], ['Costo por resultado', 'num']], campRows)}
+        <p style="margin-top:12px">${tx(t.publicidad)}</p>
+        <div class="ei-pn"><div class="p"><h5>Aspectos positivos</h5><ul>${t.positivos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div>
+        <div class="n"><h5>Aspectos negativos</h5><ul>${t.negativos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div>
+        <div class="f"><h5>Hallazgos</h5><ul>${t.hallazgos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div></div>
+        <h4>Explicación de los resultados</h4>${t.explicacion.map((p) => `<p>${tx(p)}</p>`).join('')}
+        <div class="ei-concl"><b>Conclusión:</b> ${tx(t.conclusion)}</div></article>`;
+    }).join('');
+
+    // aprendizajes, plan, conclusión
+    $('dificultades').innerHTML = A.dificultades.map((p) => `<li>${tx(p)}</li>`).join('');
+    $('aprendizajes-lista').innerHTML = A.aprendizajes.map((p) => `<li>${tx(p)}</li>`).join('');
+    $('plan-titulo').textContent = A.plan.titulo;
+    $('plan-intro').textContent = A.plan.intro;
+    $('plan-bloques').innerHTML = A.plan.bloques.map((b) => `<div class="ei-card"><h3><i></i>${esc(b.titulo)}</h3><ul>${b.puntos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul>${b.embudo ? '<div class="ei-funnel"><span class="on">Conversaciones</span><span>Prospectos calificados</span><span>Solicitudes de cotización</span><span>Cotizaciones enviadas</span><span>Pólizas vendidas</span><span>Costo por cliente</span></div><p class="ei-small" style="margin-top:8px">Hoy solo se mide el primer paso.</p>' : ''}</div>`).join('');
+    $('conclusion-txt').innerHTML = A.conclusion.map((p) => `<p>${tx(p)}</p>`).join('');
+    $('frase').textContent = A.frase;
+    $('criterios').innerHTML = sel.map((x) => `<li>${esc(largo(x))}: ${esc(BY_ID[x].criterio)}${M[x].sin_asignar > 0.5 ? ` (${fmt(M[x].sin_asignar, 'cop')} sin detalle por campaña, con IVA)` : ''}.</li>`).join('');
+  }
+
+  /* variación de cada indicador entre dos meses */
+  function cambioHTML(P, L) {
+    const rows = ORG.map(([k, n]) => ({ n, a: M[P][k], b: M[L][k], v: M[P][k] ? M[L][k] / M[P][k] - 1 : null }));
+    const max = Math.max(...rows.map((r) => Math.abs(r.v || 0)), 0.01);
+    return `<div class="ei-delta-list">${rows.map((r) => `
+      <div class="ei-delta-row">
+        <div class="ei-delta-name">${r.n}<span>${fmt(r.a)} → ${fmt(r.b)}</span></div>
+        <div class="ei-delta-track"><div class="ei-delta-bar ${r.v < 0 ? 'is-neg' : ''}" style="width:${Math.abs(r.v || 0) / max * 100}%"></div></div>
+        <div class="ei-delta-val ${tone(r.v, 'up')}">${r.v === null ? 'No aplica' : fmt(r.v, 'spct')}</div>
+      </div>`).join('')}</div>`;
+  }
+
+  /* ---------- eventos ---------- */
+  document.addEventListener('click', (ev) => {
+    const p = ev.target.closest('[data-preset]');
+    if (p && !p.disabled) { preset = p.dataset.preset; sel = ultimos(PRESETS.find((q) => q[0] === preset)[2]); guardar(); render(); return; }
+    const mb = ev.target.closest('[data-mes]');
+    if (mb) {
+      const id = mb.dataset.mes;
+      const next = sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id].sort();
+      if (!next.length) return;
+      sel = next; preset = 'custom'; guardar(); render(); return;
+    }
+    const g = ev.target.closest('[data-goto]');
+    if (g) { const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if (ev.target.closest('[data-print]')) window.print();
+  });
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach((d) => { d.dataset.wasOpen = d.open ? '1' : ''; d.open = true; }));
+  window.addEventListener('afterprint', () => document.querySelectorAll('details').forEach((d) => { d.open = d.dataset.wasOpen === '1'; }));
+  document.querySelectorAll('[data-fijo]').forEach((e) => { e.textContent = D[e.dataset.fijo]; });
+  render();
+})();
+</script>
+</body></html>
