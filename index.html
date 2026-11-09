@@ -331,6 +331,19 @@ body { margin: 0; background: #F4F6F5; color: var(--color-fg); font-family: var(
 .o-ggl { background: #C99A06; }
 #google .ei-kpis .ei-tile-value { font-size: clamp(22px, 2.4vw, 28px); }
 @media print { #google { break-before: page; margin-top: 0; } }
+
+.ei-more { margin-top: var(--cds-gap-md); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: #fff; padding: 12px 16px; }
+.ei-more > summary { cursor: pointer; font-weight: 700; color: #00733A; }
+.ei-more[open] > summary { margin-bottom: 10px; }
+.ei-month { margin-bottom: var(--cds-gap-md); }
+.ei-month-head { margin-bottom: 10px; padding-bottom: 8px; }
+#visibilidad .ei-vis-grid { grid-template-columns: 1fr; }
+@media print {
+  .ei-month { break-before: auto !important; break-inside: avoid; border: 1px solid var(--color-border-line) !important; padding: 14px !important; }
+  #google { break-before: auto !important; margin-top: 26px !important; }
+  #comparativo { break-before: page; }
+  .ei-more:not([open]) { display: none; }
+}
 </style>
 <style>@media print {
 html, body { margin: 0; background: #fff !important; }
@@ -391,11 +404,8 @@ html, body { margin: 0; background: #fff !important; }
       <button type="button" data-goto="google">Google Ads</button>
       <button type="button" data-goto="visibilidad">Visibilidad</button>
       <button type="button" data-goto="inversion">Inversión</button>
-      <button type="button" data-goto="campanas">Campañas</button>
       <button type="button" data-goto="comparativo">Comparativo</button>
-      <button type="button" data-goto="etapas">Etapas</button>
-      <button type="button" data-goto="detalle">Detalle por mes</button>
-      <button type="button" data-goto="aprendizajes">Aprendizajes</button>
+      <button type="button" data-goto="detalle">Cada mes</button>
       <button type="button" data-goto="plan">Plan</button>
       <button type="button" data-goto="conclusion">Conclusión</button>
     </nav>
@@ -435,12 +445,6 @@ html, body { margin: 0; background: #fff !important; }
     <p class="ei-note">Con la inversión en campañas de mensajes de cada mes (IVA incluido).</p>
     <div class="ei-chart" id="conv-chart"></div>
   </div>
-  <div class="ei-card" style="margin-top:var(--cds-gap-md)">
-    <h3>Resultados de las campañas de tráfico</h3>
-    <p class="ei-note">Visitas al perfil logradas con campañas de tráfico a Instagram. No se mezclan con las conversaciones ni con las visitas a páginas de destino.</p>
-    <div id="traf-table"></div>
-    <p class="ei-small" style="margin-top:10px" id="traf-otros"></p>
-  </div>
 </section>
 
 <section class="ei-section" id="google">
@@ -449,12 +453,7 @@ html, body { margin: 0; background: #fff !important; }
   <div id="google-con">
     <p class="ei-intro" id="google-intro"></p>
     <div class="ei-kpis" id="google-kpi"></div>
-    <div class="ei-card" style="margin-top:var(--cds-gap-md)">
-      <h3>Google Ads por mes</h3>
-      <p class="ei-note">Los clics de Google son de anuncios de búsqueda; no se suman con los clics de Instagram.</p>
-      <div id="google-table"></div>
-      <p class="ei-small" style="margin-top:10px" id="google-nota"></p>
-    </div>
+    <p class="ei-small" style="margin-top:8px" id="google-nota"></p>
   </div>
   <p class="ei-intro" id="google-sin" hidden>No hay datos de Google Ads para los meses elegidos.</p>
 </section>
@@ -471,12 +470,6 @@ html, body { margin: 0; background: #fff !important; }
       <p class="ei-note" id="cambio-nota"></p>
       <div id="cambio"></div>
     </div>
-    <div class="ei-card">
-      <h3>Tabla comparativa de Instagram</h3>
-      <p class="ei-note">En verde el mejor mes, en rojo el más bajo.</p>
-      <div id="tabla-instagram"></div>
-      <p class="ei-small" style="margin-top:10px" id="vis-share"></p>
-    </div>
   </div>
 </section>
 
@@ -490,13 +483,11 @@ html, body { margin: 0; background: #fff !important; }
     <div class="ei-legend"><span><i class="o-msj"></i>Mensajes</span><span><i class="o-tig"></i>Tráfico a Instagram</span><span><i class="o-tgen"></i>Tráfico general</span><span><i class="o-ven"></i>Ventas / landing</span><span><i class="o-otro"></i>Otros objetivos</span><span><i class="o-sin"></i>Sin asignar (diferencia con el consolidado)</span><span><i class="o-ggl"></i>Google Ads (búsqueda)</span></div>
     <div id="inv-chart"></div>
   </div>
-</section>
-
-<section class="ei-section" id="campanas">
-  <div class="ei-kicker">Detalle publicitario</div>
-  <h2>Todas las campañas y conjuntos</h2>
-  <p class="ei-intro">Los conjuntos aparecen debajo de su campaña y no se suman dos veces. Inversión, costos y CPM incluyen IVA del 19%. El costo por resultado se muestra para tráfico y llamadas; no para conversaciones. El asterisco (*) marca costos calculados como inversión ÷ resultados.</p>
-  <div id="tabla-campanas"></div>
+  <details class="ei-more" id="campanas">
+    <summary>Ver todas las campañas y conjuntos</summary>
+    <p class="ei-small">Inversión, costos y CPM con IVA del 19%. El costo por resultado se muestra para tráfico y llamadas. (*) Costo calculado como inversión ÷ resultados.</p>
+    <div id="tabla-campanas"></div>
+  </details>
 </section>
 
 <section class="ei-section" id="comparativo">
@@ -504,37 +495,23 @@ html, body { margin: 0; background: #fff !important; }
   <h2>Mejor y menor mes en cada indicador</h2>
   <p class="ei-intro" id="comp-intro"></p>
   <div id="tabla-comparativo"></div>
-  <div class="ei-vis-grid" id="comp-listas">
-    <div class="ei-card"><h3>Lo que mejoró</h3><ul class="ei-list" id="mejoro"></ul></div>
-    <div class="ei-card"><h3>Lo que empeoró</h3><ul class="ei-list" id="empeoro"></ul></div>
-  </div>
-  <h3 class="ei-sub" id="analisis-titulo"></h3>
-  <p class="ei-small" style="margin-bottom:12px">A la izquierda, lo que muestran los datos. A la derecha, explicaciones posibles que los datos del informe no permiten confirmar.</p>
-  <div class="ei-fh" id="hechos"></div>
-  <div class="ei-card" style="margin-top:var(--cds-gap-lg)">
-    <h3>Oportunidades de mejora</h3>
-    <ol class="ei-list" id="oportunidades"></ol>
-  </div>
-</section>
-
-<section class="ei-section" id="etapas">
-  <div class="ei-kicker">Análisis estratégico</div>
-  <h2 id="etapas-titulo"></h2>
-  <div class="ei-stages" id="etapas-lista"></div>
+  <details class="ei-more">
+    <summary>Posibles causas de las variaciones</summary>
+    <p class="ei-small">A la izquierda, lo que muestran los datos. A la derecha, explicaciones posibles que los datos no permiten confirmar.</p>
+    <div class="ei-fh" id="hechos"></div>
+  </details>
 </section>
 
 <section class="ei-section" id="detalle">
   <div class="ei-kicker">Información detallada</div>
-  <h2>Detalle de cada mes</h2>
-  <p class="ei-intro">Métricas, resultados, comparación con el mes anterior y lectura estratégica de cada periodo.</p>
+  <h2>Lo que pasó cada mes</h2>
   <div id="detalle-lista"></div>
 </section>
 
 <section class="ei-section" id="aprendizajes">
-  <div class="ei-kicker">Dificultades y aprendizajes</div>
+  <div class="ei-kicker">Aprendizajes</div>
   <h2>Qué dejó el trabajo hasta hoy</h2>
-  <div class="ei-vis-grid">
-    <div class="ei-card"><h3>Principales dificultades</h3><ol class="ei-list" id="dificultades"></ol></div>
+  <div>
     <div class="ei-card"><h3>Aprendizajes</h3><ul class="ei-list" id="aprendizajes-lista"></ul></div>
   </div>
 </section>
@@ -703,7 +680,8 @@ html, body { margin: 0; background: #fff !important; }
   };
 
   /* ---------- piezas ---------- */
-  const $ = (id) => document.getElementById(id);
+  const NADA = document.createElement('div');
+  const $ = (id) => document.getElementById(id) || NADA;
   const tile = (label, value, delta, def, main) => `<div class="ei-tile${main ? ' is-main' : ''}"><div class="ei-tile-label">${label}</div><div class="ei-tile-value">${value}</div><div class="ei-tile-delta ${delta.c}">${delta.t}</div><div class="ei-tile-def">${def}</div></div>`;
   const ultimoVsPrevio = (k, sentido) => {
     const L = sel[sel.length - 1]; const r = M[L];
@@ -883,6 +861,7 @@ html, body { margin: 0; background: #fff !important; }
 
     // comparativo
     $('comp-intro').textContent = varios ? `${BY_ID[L].nombre} frente a ${minus(F)} (o al primer mes con dato). En los costos, bajar es mejorar. Montos con IVA del ${num(D.iva * 100, 0)}%.` : 'Elija dos o más meses para comparar.';
+    $('tabla-comparativo').hidden = !varios;
     $('tabla-comparativo').innerHTML = tabla([['Indicador'], ...mesesHead, ['Mejor mes'], ['Menor rendimiento'], ['Tramo'], ['Cambio', 'num'], ['Resultado']], comp.map((r) => compRow(r, false)));
     const item = (r) => `<li>${esc(r.nombre)}: <b>${fmt(M[r.desde][r.k], r.formato)}</b> → <b>${fmt(M[L][r.k], r.formato)}</b> (<b class="${tone(r.cambio, r.sentido)}">${fmt(r.cambio, 'spct')}</b>).</li>`;
     const mej = comp.filter((r) => r.estado === 'Mejoró'), emp = comp.filter((r) => r.estado === 'Empeoró');
@@ -902,22 +881,14 @@ html, body { margin: 0; background: #fff !important; }
 
     // detalle por mes
     $('detalle-lista').innerHTML = sel.map((x) => {
-      const m = BY_ID[x], t = m.texto, r = M[x];
-      const orgRows = ORG.map(([k, n]) => `<tr><td class="ei-td-name">${n}</td><td class="num">${fmt(r[k])}</td><td class="num ei-td-m">${r.prev ? fmt(M[r.prev][k]) : 'No aplica'}</td><td class="num ${tone(r[k + '_var'], 'up')}">${r[k + '_var'] === null ? 'No aplica' : fmt(r[k + '_var'], 'spct')}</td><td class="num ei-td-m">${r.prev && r[k + '_meta'] !== null ? fmt(r[k + '_meta'], 'spct') : 'No aplica'}</td></tr>`);
-      const campRows = [...m.campanas.map((c) => campRow(x, c, false)), gapRow(x, false)];
+      const t = BY_ID[x].texto;
+      const top = (xs) => xs.slice(0, 2).map((p) => `<li>${tx(p)}</li>`).join('');
       return `<article class="ei-month" id="mes-${x}">
         <div class="ei-month-head"><h3>${esc(largo(x))}</h3><span>${esc(t.etapa)}</span></div>
-        <h4>Resumen general</h4><p>${tx(t.resumen)}</p>
-        <h4>Métricas de Instagram</h4>${tabla([['Indicador'], [esc(m.nombre), 'num'], [r.prev ? esc(BY_ID[r.prev].nombre) : 'Mes anterior', 'num'], ['Variación calculada', 'num'], ['Variación según Meta', 'num']], orgRows)}
-        <p class="ei-small" style="margin-top:8px">${tx(t.nota_instagram || '')} Visualizaciones: Instagram <b>${fmt(r.vis_instagram)}</b>, Facebook <b>${fmt(r.vis_facebook)}</b>.</p>
-        <h4>Resultados publicitarios</h4>${tabla([['Campaña / conjunto'], ['Objetivo'], ['Inversión', 'num'], ['Resultado'], ['Costo por resultado', 'num']], campRows)}
-        <p style="margin-top:12px">${tx(t.publicidad)}</p>
-        <h4>Google Ads</h4>${r.google ? tabla([['Clics', 'num'], ['Impresiones', 'num'], ['CTR', 'num'], ['CPC medio (con IVA)', 'num'], ['Inversión (con IVA)', 'num'], ['Vs. mes anterior (clics)', 'num']],
-          [`<tr><td class="num">${fmt(r.g_clics)}</td><td class="num">${fmt(r.g_impresiones)}</td><td class="num">${fmt(r.g_ctr, 'pct')}</td><td class="num">${fmt(r.g_cpc, 'cop')}</td><td class="num">${fmt(r.g_coste, 'cop')}</td><td class="num ${tone(r.g_clics_var, 'up')}">${r.g_clics_var === null ? 'No aplica' : fmt(r.g_clics_var, 'spct')}</td></tr>`]) : '<p class="ei-small">No disponible para este mes.</p>'}
-        <div class="ei-pn"><div class="p"><h5>Aspectos positivos</h5><ul>${t.positivos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div>
-        <div class="n"><h5>Aspectos negativos</h5><ul>${t.negativos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div>
-        <div class="f"><h5>Hallazgos</h5><ul>${t.hallazgos.map((p) => `<li>${tx(p)}</li>`).join('')}</ul></div></div>
-        <h4>Explicación de los resultados</h4>${t.explicacion.map((p) => `<p>${tx(p)}</p>`).join('')}
+        <p>${tx(t.resumen)}</p>
+        <div class="ei-pn"><div class="p"><h5>Lo positivo</h5><ul>${top(t.positivos)}</ul></div>
+        <div class="n"><h5>Lo negativo</h5><ul>${top(t.negativos)}</ul></div>
+        <div class="f"><h5>Hallazgo</h5><ul>${top(t.hallazgos).split('</li>')[0]}</li></ul></div></div>
         <div class="ei-concl"><b>Conclusión:</b> ${tx(t.conclusion)}</div></article>`;
     }).join('');
 
@@ -959,8 +930,6 @@ html, body { margin: 0; background: #fff !important; }
     if (g) { const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     if (ev.target.closest('[data-print]')) window.print();
   });
-  window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach((d) => { d.dataset.wasOpen = d.open ? '1' : ''; d.open = true; }));
-  window.addEventListener('afterprint', () => document.querySelectorAll('details').forEach((d) => { d.open = d.dataset.wasOpen === '1'; }));
   document.querySelectorAll('[data-fijo]').forEach((e) => { e.textContent = D[e.dataset.fijo]; });
   render();
 })();
